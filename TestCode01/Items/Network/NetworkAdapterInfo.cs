@@ -5,7 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace TestCode01.Items.Network
 {
-    public class NetworkAdapterInfo
+    internal class NetworkAdapterInfo
     {
         /// <summary>
         /// Network address information summary.
@@ -14,21 +14,19 @@ namespace TestCode01.Items.Network
         public string DeviceName { get; set; }
         public string DeviceID { get; set; }
         public string MACAddress { get; set; }
-        public NetworkAddressSummary NetworkAddressSummary { get; set; }
-
-        public string[] DNSServers { get; set; }
-        public bool IsDHCPEnabled { get; set; }
-        public string DHCPServer { get; set; }
+        public NetworkAddressSummary NetworkAddress { get; set; }
+        public NetworkAddressSummary ConfiguredNetworkAddress { get; set; }
+        public DHCPClientInfo DHCPClient { get; set; }
 
         public NetworkAdapterInfo(ManagementObject netAdapter, ManagementObject netConfig)
         {
-            InterfaceName = netAdapter["Name"]?.ToString();
-            DeviceName = netAdapter["InterfaceDescription"]?.ToString();
-            DeviceID = netAdapter["DeviceID"]?.ToString();
-            MACAddress = netConfig == null ? null : netConfig["MACAddress"]?.ToString();
-            NetworkAddressSummary = NetworkAddressSummary.Load(netAdapter, netConfig);
-            
-
+            this.InterfaceName = netAdapter["Name"]?.ToString();
+            this.DeviceName = netAdapter["InterfaceDescription"]?.ToString();
+            this.DeviceID = netAdapter["DeviceID"]?.ToString();
+            this.MACAddress = netConfig == null ? null : netConfig["MACAddress"]?.ToString();
+            this.NetworkAddress = NetworkAddressSummary.LoadFromWMI(netAdapter, netConfig);
+            this.ConfiguredNetworkAddress = NetworkAddressSummary.LoadFromRegistry(DeviceID);
+            this.DHCPClient = DHCPClientInfo.Load(netConfig, DeviceID, NetworkAddress == null && ConfiguredNetworkAddress == null);
 
         }
 

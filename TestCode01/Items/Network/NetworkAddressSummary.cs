@@ -5,21 +5,23 @@ using TestCode01.Lib;
 
 namespace TestCode01.Items.Network
 {
-    public class NetworkAddressSummary
+    internal class NetworkAddressSummary
     {
         public NetworkAddress[] Addresses { get; set; }
         public string[] DefaultGateway { get; set; }
+        public string[] DNSServers { get; set; }
 
-        public NetworkAddress[] ConfiguredAddresses { get; set; }
-        public string[] ConfiguredDefaultGateway { get; set; }
-
-        public NetworkAddressSummary() { }
-
-        public static NetworkAddressSummary Load(ManagementObject netAdapter, ManagementObject netConfig)
+        /// <summary>
+        /// Get current IP addresses from network configuration
+        /// </summary>
+        /// <param name="netAdapter"></param>
+        /// <param name="netConfig"></param>
+        /// <returns></returns>
+        public static NetworkAddressSummary LoadFromWMI(ManagementObject netAdapter, ManagementObject netConfig)
         {
-            NetworkAddressSummary ret = null;
+            if (netAdapter == null || netConfig == null) return null;
 
-            // Get current IP addresses from network configuration
+            NetworkAddressSummary ret = null;
             if (netConfig != null && netConfig["IPAddress"] != null)
             {
                 List<NetworkAddress> list = new();
@@ -34,10 +36,25 @@ namespace TestCode01.Items.Network
                 ret = new();
                 ret.Addresses = list.ToArray();
                 ret.DefaultGateway = netConfig["DefaultIPGateway"] as string[];
+                ret.DNSServers = netConfig["DNSServerSearchOrder"] as string[];
+
+                if (IsEmptyParameter(ret.DefaultGateway)) ret.DefaultGateway = null;
+                if (IsEmptyParameter(ret.DNSServers)) ret.DNSServers = null;
             }
 
-            // Get configured IP addresses from registry
-            string deviceID = netAdapter["DeviceID"]?.ToString();
+            return ret;
+        }
+
+        /// <summary>
+        /// Get configured IP addresses from registry
+        /// </summary>
+        /// <param name="deviceID"></param>
+        /// <returns></returns>
+        public static NetworkAddressSummary LoadFromRegistry(string deviceID)
+        {
+            if (string.IsNullOrEmpty(deviceID)) return null;
+
+            NetworkAddressSummary ret = null;
             string regKeyPath = @$"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\{deviceID}";
             using (var regKey = RegistryControl.GetRegistryKey(regKeyPath))
             {
@@ -55,13 +72,24 @@ namespace TestCode01.Items.Network
                             list.Add(new NetworkAddress(ipAddress, ipSubnet));
                         }
                         ret ??= new();
-                        ret.ConfiguredAddresses = list.ToArray();
-                        ret.ConfiguredDefaultGateway = regKey.GetValue("DefaultGateway") as string[];
+                        ret.Addresses = list.ToArray();
+                        ret.DefaultGateway = regKey.GetValue("DefaultGateway") as string[];
+                        ret.DNSServers = regKey.GetValue("NameServer")?.ToString().Split(',').Select(x => x.Trim()).ToArray();
+
+                        if (IsEmptyParameter(ret.DefaultGateway)) ret.DefaultGateway = null;
+                        if (IsEmptyParameter(ret.DNSServers)) ret.DNSServers = null;
                     }
                 }
             }
 
             return ret;
+        }
+
+        private static bool IsEmptyParameter(string[] array)
+        {
+            return array == null ||
+                array.Length == 0 ||
+                array.All(x => string.IsNullOrEmpty(x));
         }
     }
 }
