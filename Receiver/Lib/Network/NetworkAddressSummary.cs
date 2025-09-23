@@ -1,4 +1,4 @@
-﻿namespace TestCode01.Lib.Network
+﻿namespace WinSettingManager.Lib.Network
 {
     public class NetworkAddressSummary
     {

@@ -1,4 +1,4 @@
-﻿namespace TestCode01.Items.OSVersion
+﻿namespace WinSettingManager.Items.OSVersion
 {
     /// <summary>
     /// Version 4.0

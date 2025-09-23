@@ -1,4 +1,4 @@
-﻿namespace TestCode01.Lib
+﻿namespace WinSettingManager.Lib
 {
     public class OSVersion
     {

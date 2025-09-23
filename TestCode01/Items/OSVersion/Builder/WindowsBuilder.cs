@@ -4,9 +4,9 @@ using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TestCode01.Items.OSVersion;
+using WinSettingManager.Items.OSVersion;
 
-namespace TestCode01.Items.OSVersion.Builder
+namespace WinSettingManager.Items.OSVersion.Builder
 {
     internal class WindowsBuilder
     {

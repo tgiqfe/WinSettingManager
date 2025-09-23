@@ -1,4 +1,4 @@
-﻿namespace TestCode01.ApiPackage.System
+﻿namespace WinSettingManager.ApiPackage.System
 {
     public class SystemInfo
     {

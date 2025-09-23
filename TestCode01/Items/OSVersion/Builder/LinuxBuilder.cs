@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestCode01.Items.OSVersion.Builder
+namespace WinSettingManager.Items.OSVersion.Builder
 {
     internal class LinuxBuilder
     {
