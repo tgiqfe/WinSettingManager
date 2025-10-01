@@ -1,5 +1,5 @@
 ﻿using System.Text.RegularExpressions;
-using TestCode01.Lib;
+using WinSettingManager.Functions;
 
 namespace WinSettingManager.Items.Network
 {

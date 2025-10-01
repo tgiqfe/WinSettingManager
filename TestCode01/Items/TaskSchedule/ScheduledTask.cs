@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TaskScheduler;
 
-namespace TestCode01.Items.TaskSchedule
+namespace WinSettingManager.Items.TaskSchedule
 {
     internal class ScheduledTask
     {

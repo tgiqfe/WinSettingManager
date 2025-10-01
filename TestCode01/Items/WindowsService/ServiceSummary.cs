@@ -7,7 +7,7 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestCode01.Items.WindowsService
+namespace WinSettingManager.Items.WindowsService
 {
     internal class ServiceSummary
     {

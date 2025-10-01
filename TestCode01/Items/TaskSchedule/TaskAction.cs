@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace TestCode01.Items.TaskSchedule
+namespace WinSettingManager.Items.TaskSchedule
 {
     internal class TaskAction
     {

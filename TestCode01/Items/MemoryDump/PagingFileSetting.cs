@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Win32;
 using System.IO;
 
-namespace TestCode01.Items.MemoryDump
+namespace WinSettingManager.Items.MemoryDump
 {
     public class PagingFileSetting
     {

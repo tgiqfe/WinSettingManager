@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace TestCode01.Lib
+namespace WinSettingManager.Functions
 {
     internal class IPAddressControl
     {
@@ -30,6 +30,31 @@ namespace TestCode01.Lib
             string prefix =
                 string.Join("", subnetmask.Split('.').Select(x => Convert.ToString(int.Parse(x), 2)).ToArray());
             return Regex.Matches(prefix, @"^1+")[0].Value.Length;
+        }
+
+        /// <summary>
+        /// Is the IP address included in the network address
+        /// </summary>
+        /// <param name="ipAddress"></param>
+        /// <param name="subnetmask"></param>
+        /// <param name="networkAddress"></param>
+        /// <returns></returns>
+        public static bool IsBelongNetwork(string ipAddress, string subnetmask, string networkAddress)
+        {
+            string[] ipAddressParts = ipAddress.Split('.');
+            string[] subnetmaskParts = subnetmask.Split('.');
+            string[] networkAddressParts = networkAddress.Split('.');
+            for (int i = 0; i < 4; i++)
+            {
+                int ipPart = int.Parse(ipAddressParts[i]);
+                int maskPart = int.Parse(subnetmaskParts[i]);
+                int networkPart = int.Parse(networkAddressParts[i]);
+                if ((ipPart & maskPart) != (networkPart & maskPart))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

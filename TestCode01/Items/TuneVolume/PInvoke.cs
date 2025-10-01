@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestCode01.Items.TuneVolume
+namespace WinSettingManager.Items.TuneVolume
 {
     internal class PInvoke
     {

@@ -1,10 +1,6 @@
-﻿
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Management;
-using System.Security.Cryptography.X509Certificates;
+﻿using System.Management;
 using System.ServiceProcess;
-using TestCode01.Items.Network;
+using WinSettingManager.Items.Network;
 
 namespace WinSettingManager.Items.Network
 {

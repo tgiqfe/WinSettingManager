@@ -1,4 +1,4 @@
-﻿namespace TestCode01.Items.TuneVolume
+﻿namespace WinSettingManager.Items.TuneVolume
 {
     internal class VolumeSummary
     {

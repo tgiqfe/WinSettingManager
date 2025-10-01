@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestCode01.Items.WindowSize
+namespace WinSettingManager.Items.WindowSize
 {
     internal class AppWindowSize
     {

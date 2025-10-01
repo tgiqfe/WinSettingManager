@@ -4,9 +4,9 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using static TestCode01.Items.TuneVolume.PInvoke;
+using static WinSettingManager.Items.TuneVolume.PInvoke;
 
-namespace TestCode01.Items.TuneVolume
+namespace WinSettingManager.Items.TuneVolume
 {
     internal class Sound
     {

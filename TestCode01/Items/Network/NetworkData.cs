@@ -6,7 +6,7 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestCode01.Items.Network
+namespace WinSettingManager.Items.Network
 {
     internal class NetworkData
     {
