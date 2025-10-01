@@ -1,3 +1,6 @@
+using Receiver.Lib;
+using WinSettingManager.Items.Network;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
@@ -22,6 +25,10 @@ app.MapDelete("/", () => "");
 var api_v1 = "/api/v1";
 
 app.MapGet($"{api_v1}/system/info", () => "GET v1");
+app.MapGet($"{api_v1}/network/info", () => async (NetworkAdapter networkAdapterInfo) =>
+{
+    return await NetworkMethods.GetNetworkAdapterInfo();
+});
 
 
 

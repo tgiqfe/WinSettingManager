@@ -7,7 +7,7 @@ using Microsoft.Win32;
 
 namespace WinSettingManager.Lib
 {
-    internal class RegistryControl
+    public class RegistryControl
     {
         /// <summary>
         /// Get RegistryKey instance from full key path.
