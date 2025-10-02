@@ -4,9 +4,9 @@ namespace Receiver.Lib
 {
     public class NetworkMethods
     {
-        public static async Task<NetworkAdapterCollection> GetNetworkAdapterInfo()
+        public static async Task<NetworkAdapterCollection> GetNetworkAdapterCollection()
         {
-            return await Task.Run<NetworkAdapterCollection>(() =>
+            return await Task.Run(() =>
             {
                 return NetworkAdapterCollection.Load();
             });

@@ -1,11 +1,23 @@
 using Receiver.Lib;
+using System.Diagnostics;
 using WinSettingManager.Items.Network;
 
+
+//  Prepare Web Application.
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
+{
+    options.SerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
+});
+builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
+});
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
@@ -24,12 +36,56 @@ app.MapDelete("/", () => "");
 //  v1
 var api_v1 = "/api/v1";
 
-app.MapGet($"{api_v1}/system/info", () => "GET v1");
-app.MapGet($"{api_v1}/network/info", () => async (NetworkAdapter networkAdapterInfo) =>
+app.MapGet($"{api_v1}/system/info", () => 
+    SystemMethods.GetSystemInfo());
+app.MapGet($"{api_v1}/system/hostname", () =>
+    SystemMethods.GetHostName());
+app.MapGet($"{api_v1}/system/logonsessions", () =>
+    SystemMethods.GetLogonSessions());
+app.MapGet($"{api_v1}/system/osversion", () =>
+    SystemMethods.GetOSVersion());
+
+
+
+#if DEBUG
+app.MapPost($"{api_v1}/system/exit", () =>
 {
-    return await NetworkMethods.GetNetworkAdapterInfo();
+    Task.Run(() =>
+    {
+        Task.Delay(1000);
+        Environment.Exit(0);
+    }).ConfigureAwait(false);
+    return "";
+});
+#endif
+
+app.MapGet($"{api_v1}/network/info", async () =>
+    await NetworkMethods.GetNetworkAdapterCollection());
+
+
+app.MapGet($"{api_v1}/test/command/{{text}}", async (string text) =>
+{
+    return await Task.Run(() =>
+    {
+        using (Process process = new Process())
+        {
+            process.StartInfo.FileName = text;
+            process.StartInfo.Arguments = "";
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.CreateNoWindow = true;
+            process.Start();
+            string result = process.StandardOutput.ReadToEnd();
+            process.WaitForExit();
+            return result;
+        }
+    });
 });
 
 
 
-app.Run();
+
+
+app.Run("http://*:5000");
+
+

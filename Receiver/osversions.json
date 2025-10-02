@@ -1,0 +1,511 @@
+﻿[
+  {
+    "OSFamily": "any",
+    "Name": "MinimumOS",
+    "Alias": [],
+    "VersionName": "-2147483648",
+    "VersionAlias": [],
+    "Serial": -2147483648
+  },
+  {
+    "OSFamily": "any",
+    "Name": "MaximumOS",
+    "Alias": [],
+    "VersionName": "2147483647",
+    "VersionAlias": [],
+    "Serial": 2147483647
+  },
+  {
+    "OSFamily": "windows",
+    "Name": "Windows 10",
+    "Alias": [
+      "Windows10",
+      "Windows_10",
+      "Win10"
+    ],
+    "VersionName": "10.0.10240",
+    "VersionAlias": [
+      "1507",
+      "v1507",
+      "10240",
+      "Released in July 2015",
+      "ReleasedinJuly2015",
+      "Threshold 1",
+      "Threshold1",
+      "Release Version",
+      "ReleaseVersion"
+    ],
+    "Serial": 1010240
+  },
+  {
+    "OSFamily": "windows",
+    "Name": "Windows 10",
+    "Alias": [
+      "Windows10",
+      "Windows_10",
+      "Win10"
+    ],
+    "VersionName": "10.0.10586",
+    "VersionAlias": [
+      "1511",
+      "v1511",
+      "10586",
+      "November Update",
+      "NovemberUpdate",
+      "Threshold 2",
+      "Threshold2"
+    ],
+    "Serial": 1010586
+  },
+  {
+    "OSFamily": "windows",
+    "Name": "Windows 10",
+    "Alias": [
+      "Windows10",
+      "Windows_10",
+      "Win10"
+    ],
+    "VersionName": "10.0.14393",
+    "VersionAlias": [
+      "1607",
+      "v1607",
+      "14393",
+      "Anniversary Update",
+      "AnniversaryUpdate",
+      "Redstone 1",
+      "Redstone1"
+    ],
+    "Serial": 1014393
+  },
+  {
+    "OSFamily": "windows",
+    "Name": "Windows 10",
+    "Alias": [
+      "Windows10",
+      "Windows_10",
+      "Win10"
+    ],
+    "VersionName": "10.0.15063",
+    "VersionAlias": [
+      "1703",
+      "v1703",
+      "15063",
+      "Creators Update",
+      "CreatorsUpdate",
+      "Redstone 2",
+      "Redstone2"
+    ],
+    "Serial": 1015063
+  },
+  {
+    "OSFamily": "windows",
+    "Name": "Windows 10",
+    "Alias": [
+      "Windows10",
+      "Windows_10",
+      "Win10"
+    ],
+    "VersionName": "10.0.16299",
+    "VersionAlias": [
+      "1709",
+      "v1709",
+      "16299",
+      "Fall Creators Update",
+      "FallCreatorsUpdate",
+      "Redstone 3",
+      "Redstone3"
+    ],
+    "Serial": 1016299
+  },
+  {
+    "OSFamily": "windows",
+    "Name": "Windows 10",
+    "Alias": [
+      "Windows10",
+      "Windows_10",
+      "Win10"
+    ],
+    "VersionName": "10.0.17134",
+    "VersionAlias": [
+      "1803",
+      "v1803",
+      "17134",
+      "April 2018 Update",
+      "April2018Update",
+      "Redstone 4",
+      "Redstone4"
+    ],
+    "Serial": 1017134
+  },
+  {
+    "OSFamily": "windows",
+    "Name": "Windows 10",
+    "Alias": [
+      "Windows10",
+      "Windows_10",
+      "Win10"
+    ],
+    "VersionName": "10.0.17763",
+    "VersionAlias": [
+      "1809",
+      "v1809",
+      "17763",
+      "October 2018 Update",
+      "October2018Update",
+      "Redstone 5",
+      "Redstone5"
+    ],
+    "Serial": 1017763
+  },
+  {
+    "OSFamily": "windows",
+    "Name": "Windows 10",
+    "Alias": [
+      "Windows10",
+      "Windows_10",
+      "Win10"
+    ],
+    "VersionName": "10.0.18362",
+    "VersionAlias": [
+      "1903",
+      "v1903",
+      "18362",
+      "May 2019 Update",
+      "May2019Update",
+      "19H1"
+    ],
+    "Serial": 1018362
+  },
+  {
+    "OSFamily": "windows",
+    "Name": "Windows 10",
+    "Alias": [
+      "Windows10",
+      "Windows_10",
+      "Win10"
+    ],
+    "VersionName": "10.0.18636",
+    "VersionAlias": [
+      "1909",
+      "v1909",
+      "18636",
+      "November 2019 Update",
+      "November2019Update",
+      "19H2"
+    ],
+    "Serial": 1018363
+  },
+  {
+    "OSFamily": "windows",
+    "Name": "Windows 10",
+    "Alias": [
+      "Windows10",
+      "Windows_10",
+      "Win10"
+    ],
+    "VersionName": "10.0.19041",
+    "VersionAlias": [
+      "2004",
+      "v2004",
+      "19041",
+      "May 2020 Update",
+      "May2020Update",
+      "20H1"
+    ],
+    "Serial": 1019041
+  },
+  {
+    "OSFamily": "windows",
+    "Name": "Windows 10",
+    "Alias": [
+      "Windows10",
+      "Windows_10",
+      "Win10"
+    ],
+    "VersionName": "10.0.19042",
+    "VersionAlias": [
+      "20H2",
+      "v20H2",
+      "19042",
+      "October 2020 Update",
+      "October2020Update"
+    ],
+    "Serial": 1019042
+  },
+  {
+    "OSFamily": "windows",
+    "Name": "Windows 10",
+    "Alias": [
+      "Windows10",
+      "Windows_10",
+      "Win10"
+    ],
+    "VersionName": "10.0.19043",
+    "VersionAlias": [
+      "21H1",
+      "v21H1",
+      "19043",
+      "May 2021 Update",
+      "May2021Update"
+    ],
+    "Serial": 1019043
+  },
+  {
+    "OSFamily": "windows",
+    "Name": "Windows 10",
+    "Alias": [
+      "Windows10",
+      "Windows_10",
+      "Win10"
+    ],
+    "VersionName": "10.0.19044",
+    "VersionAlias": [
+      "21H2",
+      "v21H2",
+      "19044",
+      "November 2021 Update",
+      "November2021Update"
+    ],
+    "Serial": 1019044
+  },
+  {
+    "OSFamily": "windows",
+    "Name": "Windows 10",
+    "Alias": [
+      "Windows10",
+      "Windows_10",
+      "Win10"
+    ],
+    "VersionName": "10.0.19045",
+    "VersionAlias": [
+      "22H2",
+      "v22H2",
+      "19045",
+      "2022 Update",
+      "2022Update"
+    ],
+    "Serial": 1019045
+  },
+  {
+    "OSFamily": "windows",
+    "Name": "Windows 11",
+    "Alias": [
+      "Windows11",
+      "Windows_11",
+      "Win11"
+    ],
+    "VersionName": "10.0.22000",
+    "VersionAlias": [
+      "21H2",
+      "v21H2",
+      "22000",
+      "Sun Valley",
+      "Release Version",
+      "ReleaseVersion"
+    ],
+    "Serial": 1122000
+  },
+  {
+    "OSFamily": "windows",
+    "Name": "Windows 11",
+    "Alias": [
+      "Windows11",
+      "Windows_11",
+      "Win11"
+    ],
+    "VersionName": "10.0.22621",
+    "VersionAlias": [
+      "22H2",
+      "v22H2",
+      "22621",
+      "2022 Update",
+      "2022Update"
+    ],
+    "Serial": 1122621
+  },
+  {
+    "OSFamily": "windows",
+    "Name": "Windows 11",
+    "Alias": [
+      "Windows11",
+      "Windows_11",
+      "Win11"
+    ],
+    "VersionName": "10.0.22631",
+    "VersionAlias": [
+      "23H2",
+      "v23H2",
+      "22631",
+      "2023 Update",
+      "2023Update"
+    ],
+    "Serial": 1122631
+  },
+  {
+    "OSFamily": "windows",
+    "Name": "Windows 11",
+    "Alias": [
+      "Windows11",
+      "Windows_11",
+      "Win11"
+    ],
+    "VersionName": "10.0.26100",
+    "VersionAlias": [
+      "24H2",
+      "v24H2",
+      "26100",
+      "2024 Update",
+      "2024Update"
+    ],
+    "Serial": 1126100
+  },
+  {
+    "OSFamily": "windows",
+    "Name": "Windows Server",
+    "Alias": [
+      "WindowsServer",
+      "Windows SV",
+      "WindowsSV",
+      "WinSV",
+      "WinSrv"
+    ],
+    "VersionName": "6.2.9200",
+    "VersionAlias": [
+      "2012",
+      "9200",
+      "Windows Server 2012",
+      "WindowsSevrer2012",
+      "WinSrv2012",
+      "Win2012",
+      "NT 6.2",
+      "NT6.2",
+      "NT 6.2.9200",
+      "NT6.2.9200"
+    ],
+    "ServerOS": true,
+    "Serial": 5009200
+  },
+  {
+    "OSFamily": "windows",
+    "Name": "Windows Server",
+    "Alias": [
+      "WindowsServer",
+      "Windows SV",
+      "WindowsSV",
+      "WinSV",
+      "WinSrv"
+    ],
+    "VersionName": "6.2.9600",
+    "VersionAlias": [
+      "2012 R2",
+      "2012R2",
+      "9600",
+      "Windows Server 2012R2",
+      "WindowsSevrer2012R2",
+      "WinSrv2012R2",
+      "Win2012R2",
+      "NT 6.3",
+      "NT6.3",
+      "NT 6.3.9600",
+      "NT6.3.9600"
+    ],
+    "ServerOS": true,
+    "Serial": 5009600
+  },
+  {
+    "OSFamily": "windows",
+    "Name": "Windows Server",
+    "Alias": [
+      "WindowsServer",
+      "Windows SV",
+      "WindowsSV",
+      "WinSV",
+      "WinSrv"
+    ],
+    "VersionName": "10.0.14393",
+    "VersionAlias": [
+      "2016",
+      "14393",
+      "Windows Server 2016",
+      "WindowsSevrer2016",
+      "WinSrv2016",
+      "Win2016",
+      "NT 10.0.14393",
+      "NT10.0.14393"
+    ],
+    "ServerOS": true,
+    "Serial": 5014393
+  },
+  {
+    "OSFamily": "windows",
+    "Name": "Windows Server",
+    "Alias": [
+      "WindowsServer",
+      "Windows SV",
+      "WindowsSV",
+      "WinSV",
+      "WinSrv"
+    ],
+    "VersionName": "10.0.17763",
+    "VersionAlias": [
+      "2019",
+      "17763",
+      "Windows Server 2019",
+      "WindowsSevrer2019",
+      "WinSrv2019",
+      "Win2019",
+      "NT 10.0.17763",
+      "NT10.0.17763"
+    ],
+    "ServerOS": true,
+    "Serial": 5017763
+  },
+  {
+    "OSFamily": "windows",
+    "Name": "Windows Server",
+    "Alias": [
+      "WindowsServer",
+      "Windows SV",
+      "WindowsSV",
+      "WinSV",
+      "WinSrv"
+    ],
+    "VersionName": "10.0.20348",
+    "VersionAlias": [
+      "2022",
+      "20348",
+      "Windows Server 2022",
+      "WindowsSevrer2022",
+      "WinSrv2022",
+      "Win2022",
+      "NT 10.0.20348",
+      "NT10.0.20348"
+    ],
+    "ServerOS": true,
+    "Serial": 5020348
+  },
+  {
+    "OSFamily": "windows",
+    "Name": "Windows Server",
+    "Alias": [
+      "WindowsServer",
+      "Windows SV",
+      "WindowsSV",
+      "WinSV",
+      "WinSrv"
+    ],
+    "VersionName": "10.0.26100",
+    "VersionAlias": [
+      "2025",
+      "26100",
+      "Windows Server 2025",
+      "WindowsSevrer2025",
+      "WinSrv2025",
+      "Win2025",
+      "NT 10.0.26100",
+      "NT10.0.26100"
+    ],
+    "ServerOS": true,
+    "Serial": 5026100
+  }
+]
