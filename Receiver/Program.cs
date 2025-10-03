@@ -28,10 +28,12 @@ if (app.Environment.IsDevelopment())
 }
 
 // empty route handlers
+#if DEBUG
 app.MapGet("/", () => "");
 app.MapPost("/", () => "");
 app.MapPut("/", () => "");
 app.MapDelete("/", () => "");
+#endif
 
 //  api setting
 //  v1
@@ -50,6 +52,10 @@ app.MapGet($"{api_v1}/system/soundvolume", () =>
     SystemMethods.GetSoundVolume());
 app.MapPost($"{api_v1}/system/soundvolume", (VolumeSummary volSummary) =>
      SystemMethods.SetSoundVolume(volSummary));
+app.MapGet($"{api_v1}/system/services", () =>
+"");
+app.MapGet($"{api_v1}/system/services/{{name}}", (string name) =>
+"");
 
 #if DEBUG
 app.MapPost($"{api_v1}/system/exit", () =>

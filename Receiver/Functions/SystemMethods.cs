@@ -54,5 +54,7 @@ namespace Receiver.Lib
             Sound.SetVolume((float)volSummary.Level / 100);
             return VolumeSummary.Load();
         }
+
+        
     }
 }

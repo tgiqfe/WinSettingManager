@@ -65,7 +65,8 @@ namespace WinSettingManager.Items.WindowsService
             {
                 this.StartupType = "DelayedAutomatic";
             }
-            //  Win32APIからのほうがスマートなので、レジストリから調べる案は廃止。備忘録として残しておきます。
+            
+            //  Ref: from registry pattern.
             /*
             int delayedAutoStart = (int)Registry.GetValue(
                 @"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\" + sc.ServiceName,
