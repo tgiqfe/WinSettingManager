@@ -1,5 +1,6 @@
 ﻿using WinSettingManager.Items.LogonSession;
 using WinSettingManager.Items.OSVersion;
+using WinSettingManager.Items.TuneVolume;
 
 namespace Receiver.Lib
 {
@@ -40,6 +41,18 @@ namespace Receiver.Lib
         {
             var os = OSVersions.GetCurrent();
             return $"{os.Name} {os.Edition} [{os.VersionName}]";
+        }
+
+        public static VolumeSummary GetSoundVolume()
+        {
+            return VolumeSummary.Load();
+        }
+
+        public static VolumeSummary SetSoundVolume(VolumeSummary volSummary)
+        {
+            Sound.SetMute(volSummary.IsMute);
+            Sound.SetVolume((float)volSummary.Level / 100);
+            return VolumeSummary.Load();
         }
     }
 }

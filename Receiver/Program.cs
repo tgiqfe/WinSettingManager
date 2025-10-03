@@ -1,6 +1,7 @@
 using Receiver.Lib;
 using System.Diagnostics;
 using WinSettingManager.Items.Network;
+using WinSettingManager.Items.TuneVolume;
 
 
 //  Prepare Web Application.
@@ -36,7 +37,8 @@ app.MapDelete("/", () => "");
 //  v1
 var api_v1 = "/api/v1";
 
-app.MapGet($"{api_v1}/system/info", () => 
+//  System Information
+app.MapGet($"{api_v1}/system/info", () =>
     SystemMethods.GetSystemInfo());
 app.MapGet($"{api_v1}/system/hostname", () =>
     SystemMethods.GetHostName());
@@ -44,8 +46,10 @@ app.MapGet($"{api_v1}/system/logonsessions", () =>
     SystemMethods.GetLogonSessions());
 app.MapGet($"{api_v1}/system/osversion", () =>
     SystemMethods.GetOSVersion());
-
-
+app.MapGet($"{api_v1}/system/soundvolume", () =>
+    SystemMethods.GetSoundVolume());
+app.MapPost($"{api_v1}/system/soundvolume", (VolumeSummary volSummary) =>
+     SystemMethods.SetSoundVolume(volSummary));
 
 #if DEBUG
 app.MapPost($"{api_v1}/system/exit", () =>
@@ -59,10 +63,13 @@ app.MapPost($"{api_v1}/system/exit", () =>
 });
 #endif
 
+//  Network Information
 app.MapGet($"{api_v1}/network/info", async () =>
     await NetworkMethods.GetNetworkAdapterCollection());
 
 
+
+//  Test Code
 app.MapGet($"{api_v1}/test/command/{{text}}", async (string text) =>
 {
     return await Task.Run(() =>

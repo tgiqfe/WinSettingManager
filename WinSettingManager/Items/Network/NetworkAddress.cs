@@ -40,5 +40,18 @@ namespace WinSettingManager.Items.Network
                 this.PrefixLength = int.TryParse(ipSubnet, out int prefixLength) ? prefixLength : null;
             }
         }
+
+        public override string ToString()
+        {
+            if (AddressType == NetworkAddressType.IPv4)
+            {
+                return $"{IPAddress}/{SubnetMask}";
+            }
+            if (AddressType == NetworkAddressType.IPv6)
+            {
+                return $"{IPAddress}/{PrefixLength}";
+            }
+            return "";
+        }
     }
 }
