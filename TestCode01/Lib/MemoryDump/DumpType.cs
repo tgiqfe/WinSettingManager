@@ -1,4 +1,4 @@
-﻿namespace WinSettingManager.Items.MemoryDump
+﻿namespace WinSettingManager.Lib.MemoryDump
 {
     public enum DumpType
     {

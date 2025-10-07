@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 //  [WTSINFOA]
 //  https://learn.microsoft.com/en-us/windows/win32/api/wtsapi32/ns-wtsapi32-wtsinfoa
 
-namespace WinSettingManager.Items.LogonSession
+namespace WinSettingManager.Lib.LogonSession
 {
     internal class UserLogonSession
     {

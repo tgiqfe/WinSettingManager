@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinSettingManager.Items.OSVersion.Builder
+namespace WinSettingManager.Lib.OSVersion.Builder
 {
     public class MacOSBuilder
     {

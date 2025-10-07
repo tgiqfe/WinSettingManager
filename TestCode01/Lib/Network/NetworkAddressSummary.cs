@@ -3,7 +3,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 using WinSettingManager.Lib;
 
-namespace WinSettingManager.Items.Network
+namespace WinSettingManager.Lib.Network
 {
     internal class NetworkAddressSummary
     {

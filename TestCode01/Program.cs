@@ -3,9 +3,9 @@ using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Unicode;
-using WinSettingManager.Items.LogonSession;
-using WinSettingManager.Items.Network;
-using WinSettingManager.Items.OSVersion;
+using WinSettingManager.Lib.LogonSession;
+using WinSettingManager.Lib.Network;
+using WinSettingManager.Lib.OSVersion;
 
 /*
 var networkInfos = NetworkAdapterInfo.Load();

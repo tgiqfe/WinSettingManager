@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinSettingManager.Items.TaskSchedule
+namespace WinSettingManager.Lib.TaskSchedule
 {
     internal class Functions
     {

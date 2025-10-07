@@ -7,7 +7,7 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinSettingManager.Items.WindowsService
+namespace WinSettingManager.Lib.WindowsService
 {
     public class ServiceSummary
     {

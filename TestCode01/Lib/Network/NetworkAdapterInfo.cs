@@ -1,8 +1,8 @@
 ﻿using System.Management;
 using System.ServiceProcess;
-using WinSettingManager.Items.Network;
+using WinSettingManager.Lib.Network;
 
-namespace WinSettingManager.Items.Network
+namespace WinSettingManager.Lib.Network
 {
     internal class NetworkAdapterInfo
     {

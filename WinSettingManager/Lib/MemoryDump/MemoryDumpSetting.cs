@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Win32;
 using System.IO;
 
-namespace WinSettingManager.Items.MemoryDump
+namespace WinSettingManager.Lib.MemoryDump
 {
     /// <summary>
     /// 参考)

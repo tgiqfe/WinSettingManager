@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TaskScheduler;
 
-namespace WinSettingManager.Items.TaskSchedule
+namespace WinSettingManager.Lib.TaskSchedule
 {
     public class TaskGeneral
     {

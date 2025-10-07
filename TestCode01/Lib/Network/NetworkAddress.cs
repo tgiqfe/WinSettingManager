@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using WinSettingManager.Functions;
 
-namespace WinSettingManager.Items.Network
+namespace WinSettingManager.Lib.Network
 {
     public class NetworkAddress
     {

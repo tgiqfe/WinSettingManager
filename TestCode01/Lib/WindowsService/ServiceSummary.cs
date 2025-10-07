@@ -6,24 +6,24 @@ using System.Management;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
+using WinSettingManager.Functions;
 
-namespace WinSettingManager.Items.WindowsService
+namespace WinSettingManager.Lib.WindowsService
 {
     internal class ServiceSummary
     {
         public string Name { get; set; }
         public string DisplayName { get; set; }
-        public string Status { get; set; }
-        public string StartupType { get; set; }
+        public ServiceControllerStatus Status { get; set; }
+        public ServiceStartMode StartupType { get; set; }
         public bool? TriggerStart { get; set; }
+        public bool? DelayedAutoStart { get; set; }
         public string ExecutePath { get; set; }
         public string Description { get; set; }
         public string LogonName { get; set; }
         public int? ProcessId { get; set; }
         public string[] ServicesDependedOn { get; set; }
         public string[] DependentServices { get; set; }
-
-        //  sc qfailer ～ を使用してのサービス回復処理については、そのうち実装する・・・かも
 
         public ServiceSummary() { }
         public ServiceSummary(ServiceController sc)
@@ -39,60 +39,16 @@ namespace WinSettingManager.Items.WindowsService
 
                 this.Name = sc.ServiceName;
                 this.DisplayName = sc.DisplayName;
-                this.Status = sc.Status.ToString();
-
-                LoadStartupType(sc, mo);
-
+                this.Status = sc.Status;
+                this.StartupType = sc.StartType;
+                this.TriggerStart = ServiceControl.IsTriggeredStart(sc);
+                this.TriggerStart = ServiceControl.IsDelayedAutoStart(sc, mo);
                 this.ExecutePath = mo["PathName"] as string;
                 this.Description = mo["Description"] as string;
                 this.LogonName = mo["StartName"] as string;
                 this.ProcessId = mo["ProcessId"] as int?;
-
                 this.ServicesDependedOn = sc.ServicesDependedOn.Select(x => x.ServiceName).ToArray();
                 this.DependentServices = sc.DependentServices.Select(x => x.ServiceName).ToArray();
-            }
-        }
-
-        /// <summary>
-        /// スタートアップの種類を取得 (少し長いのでメソッドを分離)
-        /// </summary>
-        /// <param name="sc"></param>
-        private void LoadStartupType(ServiceController sc, ManagementObject mo)
-        {
-            this.StartupType = sc.StartType.ToString();
-
-            if (sc.StartType == ServiceStartMode.Automatic && (bool)mo["DelayedAutoStart"])
-            {
-                this.StartupType = "DelayedAutomatic";
-            }
-            
-            //  Ref: from registry pattern.
-            /*
-            int delayedAutoStart = (int)Registry.GetValue(
-                @"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\" + sc.ServiceName,
-                "DelayedAutostart", 0);
-            if (delayedAutoStart > 0)
-            {
-                this.StartupType = "DelayedAutomatic";
-            }
-            */
-
-            if (sc.StartType == ServiceStartMode.Automatic || sc.StartType == ServiceStartMode.Manual)
-            {
-                using (Process proc = new Process())
-                {
-                    proc.StartInfo.FileName = "sc";
-                    proc.StartInfo.Arguments = "qtriggerinfo \"" + sc.ServiceName + "\"";
-                    proc.StartInfo.CreateNoWindow = true;
-                    proc.StartInfo.UseShellExecute = false;
-                    proc.StartInfo.RedirectStandardOutput = true;
-                    proc.Start();
-                    string resultString = proc.StandardOutput.ReadToEnd();
-                    this.TriggerStart =
-                        resultString.Contains("[SC] QueryServiceConfig2 SUCCESS") &&
-                        resultString.Contains("サービス名: " + sc.ServiceName);
-                    proc.WaitForExit();
-                }
             }
         }
     }

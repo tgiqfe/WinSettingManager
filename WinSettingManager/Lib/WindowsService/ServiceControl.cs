@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace WinSettingManager.Items.WindowsService
+namespace WinSettingManager.Lib.WindowsService
 {
     public class ServiceControl
     {

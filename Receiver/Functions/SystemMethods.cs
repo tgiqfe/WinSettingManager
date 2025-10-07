@@ -1,6 +1,6 @@
-﻿using WinSettingManager.Items.LogonSession;
-using WinSettingManager.Items.OSVersion;
-using WinSettingManager.Items.TuneVolume;
+﻿using WinSettingManager.Lib.LogonSession;
+using WinSettingManager.Lib.OSVersion;
+using WinSettingManager.Lib.TuneVolume;
 
 namespace Receiver.Lib
 {

@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinSettingManager.Items.LogonSession
+namespace WinSettingManager.Lib.LogonSession
 {
     internal class PInvoke
     {

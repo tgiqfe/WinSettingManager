@@ -4,6 +4,7 @@ using System.Linq;
 using System.Management;
 using System.ServiceProcess;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using WinSettingManager.Lib;
 
@@ -18,14 +19,35 @@ namespace WinSettingManager.Functions
         /// <returns></returns>
         public static ServiceController GetServiceController(string serviceName)
         {
-            var ret = ServiceController.GetServices().FirstOrDefault(
-                x => x.ServiceName.Equals(serviceName, StringComparison.OrdinalIgnoreCase));
-            if (ret == null)
+            if (serviceName.Contains("*") || serviceName.Contains("?"))
             {
-                ret = ServiceController.GetServices().FirstOrDefault(
-                    x => x.DisplayName.Equals(serviceName, StringComparison.OrdinalIgnoreCase));
+                var regPattern = willdcardMatch(serviceName);
+                return ServiceController.GetServices().
+                    FirstOrDefault(x =>
+                        regPattern.IsMatch(x.ServiceName) || regPattern.IsMatch(x.DisplayName));
             }
-            return ret;
+            else
+            {
+                return ServiceController.GetServices().
+                    FirstOrDefault(x =>
+                        x.ServiceName.Equals(serviceName, StringComparison.OrdinalIgnoreCase) ||
+                        x.DisplayName.Equals(serviceName, StringComparison.OrdinalIgnoreCase));
+            }
+
+            Regex willdcardMatch(string text)
+            {
+                string patternString = Regex.Replace(text, ".",
+                    x =>
+                    {
+                        string y = x.Value;
+                        if (y.Equals("?")) { return "."; }
+                        else if (y.Equals("*")) { return ".*"; }
+                        else { return Regex.Escape(y); }
+                    });
+                if (!patternString.StartsWith("*")) { patternString = "^" + patternString; }
+                if (!patternString.EndsWith("*")) { patternString = patternString + "$"; }
+                return new Regex(patternString, RegexOptions.IgnoreCase);
+            }
         }
 
         /// <summary>

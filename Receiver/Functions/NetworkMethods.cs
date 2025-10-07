@@ -1,5 +1,5 @@
 ﻿using System.Text;
-using WinSettingManager.Items.Network;
+using WinSettingManager.Lib.Network;
 
 namespace Receiver.Lib
 {

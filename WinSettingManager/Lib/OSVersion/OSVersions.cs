@@ -4,10 +4,10 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using WinSettingManager.Items.OSVersion.Builder;
-using WinSettingManager.Items.OSVersion.Functions;
+using WinSettingManager.Lib.OSVersion.Builder;
+using WinSettingManager.Lib.OSVersion.Functions;
 
-namespace WinSettingManager.Items.OSVersion
+namespace WinSettingManager.Lib.OSVersion
 {
     public class OSVersions : List<OSVersion>
     {

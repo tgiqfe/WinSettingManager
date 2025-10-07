@@ -1,7 +1,7 @@
 using Receiver.Lib;
 using System.Diagnostics;
-using WinSettingManager.Items.Network;
-using WinSettingManager.Items.TuneVolume;
+using WinSettingManager.Lib.Network;
+using WinSettingManager.Lib.TuneVolume;
 
 
 //  Prepare Web Application.

@@ -1,7 +1,7 @@
 ﻿using System.ServiceProcess;
 using WinSettingManager.Functions;
 
-namespace WinSettingManager.Items.WindowsService
+namespace WinSettingManager.Lib.WindowsService
 {
     public class ServiceSimpleSummary
     {
@@ -13,11 +13,11 @@ namespace WinSettingManager.Items.WindowsService
         {
             this.Name = sc.ServiceName;
             this.DisplayName = sc.DisplayName;
-            this.StartupType = sc.StartType.ToString() switch
+            this.StartupType = sc.StartType switch
             {
-                "Automatic" => "自動",
-                "Manual" => "手動",
-                "Disabled" => "無効",
+                ServiceStartMode.Automatic => "自動",
+                ServiceStartMode.Manual => "手動",
+                ServiceStartMode.Disabled => "無効",
                 _ => "不明"
             };
 
