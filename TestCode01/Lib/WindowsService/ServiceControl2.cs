@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WinSettingManager.Items.WindowsService
 {
-    internal class ServiceControl
+    internal class ServiceControl2
     {
         /// <summary>
         /// サービス名orディスプレイ名からServiceControllerを取得。
