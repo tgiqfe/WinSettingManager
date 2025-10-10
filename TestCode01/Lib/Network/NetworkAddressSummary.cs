@@ -5,7 +5,7 @@ using WinSettingManager.Lib;
 
 namespace WinSettingManager.Lib.Network
 {
-    internal class NetworkAddressSummary
+    public class NetworkAddressSummary
     {
         public NetworkAddress[] Addresses { get; set; }
         public string[] DefaultGateway { get; set; }

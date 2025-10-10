@@ -1,6 +1,9 @@
-﻿using WinSettingManager.Lib.LogonSession;
+﻿using WinSettingManager.Functions;
+using WinSettingManager.Lib.ADDomain;
+using WinSettingManager.Lib.LogonSession;
 using WinSettingManager.Lib.OSVersion;
 using WinSettingManager.Lib.TuneVolume;
+using WinSettingManager.Lib.WindowsService;
 
 namespace Receiver.Lib
 {
@@ -15,6 +18,8 @@ namespace Receiver.Lib
                 return
                     $"OS Version         : {Environment.OSVersion}\n" +
                     $"Machine Name       : {Environment.MachineName}\n" +
+                    $"Is Domain PC       : {JoinDomainControl.IsDomainJoined()}\n" +
+                    $"Domain Name        : {JoinDomainControl.GetDomainName()}\n" +
                     $"User Name          : {userNames}\n" +
                     $"Processor Count    : {Environment.ProcessorCount}\n" +
                     $"System Directory   : {Environment.SystemDirectory}\n" +
@@ -27,9 +32,16 @@ namespace Receiver.Lib
             });
         }
 
+
+
         public static string GetHostName()
         {
             return Environment.MachineName;
+        }
+
+        public static string GetDomainName()
+        {
+            return JoinDomainControl.GetDomainName();
         }
 
         public static IEnumerable<UserLogonSession> GetLogonSessions()
@@ -55,6 +67,24 @@ namespace Receiver.Lib
             return VolumeSummary.Load();
         }
 
-        
+        public static async Task<ServiceSummaryCollection> GetServiceSummaries()
+        {
+            return await Task.Run(() => ServiceSummaryCollection.Load());
+        }
+
+        public static async Task<ServiceSimpleSummaryCollection> GetServiceSimpleSummaries()
+        {
+            return await Task.Run(() => ServiceSimpleSummaryCollection.Load());
+        }
+
+        public static async Task<ServiceSummary> GetServiceSummary(string name)
+        {
+            return await Task.Run(() => new ServiceSummary(name));
+        }
+
+        public static async Task<ServiceSimpleSummary> GetServiceSimpleSummary(string name)
+        {
+            return await Task.Run(() => new ServiceSimpleSummary(name));
+        }
     }
 }

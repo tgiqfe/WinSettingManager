@@ -1,5 +1,6 @@
 using Receiver.Lib;
 using System.Diagnostics;
+using WinSettingManager.Lib.ADDomain;
 using WinSettingManager.Lib.Network;
 using WinSettingManager.Lib.TuneVolume;
 
@@ -44,6 +45,8 @@ app.MapGet($"{api_v1}/system/info", () =>
     SystemMethods.GetSystemInfo());
 app.MapGet($"{api_v1}/system/hostname", () =>
     SystemMethods.GetHostName());
+app.MapGet($"{api_v1}/system/domainname", () =>
+    SystemMethods.GetDomainName());
 app.MapGet($"{api_v1}/system/logonsessions", () =>
     SystemMethods.GetLogonSessions());
 app.MapGet($"{api_v1}/system/osversion", () =>
@@ -51,11 +54,17 @@ app.MapGet($"{api_v1}/system/osversion", () =>
 app.MapGet($"{api_v1}/system/soundvolume", () =>
     SystemMethods.GetSoundVolume());
 app.MapPost($"{api_v1}/system/soundvolume", (VolumeSummary volSummary) =>
-     SystemMethods.SetSoundVolume(volSummary));
-app.MapGet($"{api_v1}/system/services", () =>
-"");
-app.MapGet($"{api_v1}/system/services/{{name}}", (string name) =>
-"");
+    SystemMethods.SetSoundVolume(volSummary));
+app.MapGet($"{api_v1}/system/services", async () =>
+    await SystemMethods.GetServiceSummaries());
+app.MapGet($"{api_v1}/system/services/simple", async () =>
+    await SystemMethods.GetServiceSimpleSummaries());
+app.MapGet($"{api_v1}/system/services/{{name}}", async (string name) =>
+    await SystemMethods.GetServiceSummary(name));
+app.MapGet($"{api_v1}/system/services/simple/{{name}}", async (string name) =>
+    await SystemMethods.GetServiceSimpleSummary(name));
+
+
 
 #if DEBUG
 app.MapPost($"{api_v1}/system/exit", () =>

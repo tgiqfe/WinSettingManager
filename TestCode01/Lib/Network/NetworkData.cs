@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WinSettingManager.Lib.Network
 {
-    internal class NetworkData
+    public class NetworkData
     {
         public ManagementObject NetworkAdapter { get; set; }
         public ManagementObject NetworkConfig { get; set; }

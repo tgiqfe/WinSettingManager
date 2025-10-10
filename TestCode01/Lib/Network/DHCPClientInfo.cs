@@ -9,7 +9,7 @@ using WinSettingManager.Lib;
 
 namespace WinSettingManager.Lib.Network
 {
-    internal class DHCPClientInfo
+    public class DHCPClientInfo
     {
         public bool IsDhcpIpEnabled { get; set; }
         public bool IsDhcpDnsEnabled { get; set; }
