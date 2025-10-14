@@ -1,6 +1,7 @@
 using Receiver.DataContact;
 using Receiver.Lib;
 using System.Diagnostics;
+using System.Reflection.Metadata.Ecma335;
 using System.Text.Json.Nodes;
 using WinSettingManager.Lib.ADDomain;
 using WinSettingManager.Lib.Network;
@@ -69,6 +70,11 @@ app.MapGet($"{api_v1}/system/services/{{name}}", async (string name) =>
     await SystemMethods.GetServiceSummary(name));
 app.MapGet($"{api_v1}/system/services/simple/{{name}}", async (string name) =>
     await SystemMethods.GetServiceSimpleSummary(name));
+
+
+app.MapPost($"{api_v1}/registry/key", (HttpRequest req) => "");
+app.MapPost($"{api_v1}/registry/parameter", (HttpRequest req) => "");
+
 
 
 
