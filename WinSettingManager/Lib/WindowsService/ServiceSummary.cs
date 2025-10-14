@@ -4,7 +4,7 @@ using WinSettingManager.Functions;
 
 namespace WinSettingManager.Lib.WindowsService
 {
-    public class ServiceSummary
+    public class ServiceSummary : BaseServiceSummary
     {
         public string Name { get; set; }
         public string DisplayName { get; set; }
@@ -28,8 +28,8 @@ namespace WinSettingManager.Lib.WindowsService
             this.DisplayName = sc.DisplayName;
             this.Status = sc.Status;
             this.StartupType = sc.StartType;
-            this.TriggerStart = ServiceControl.IsTriggeredStart(sc);
-            this.TriggerStart = ServiceControl.IsDelayedAutoStart(sc, mo);
+            this.TriggerStart = IsTriggeredStart(sc);
+            this.TriggerStart = IsDelayedAutoStart(sc, mo);
             if (mo != null)
             {
                 this.ExecutePath = mo["PathName"] as string;
@@ -38,11 +38,5 @@ namespace WinSettingManager.Lib.WindowsService
                 this.ProcessId = (uint)mo["ProcessId"];
             }
         }
-
-        /*
-        public ServiceSummary(string name) : this(ServiceControl.GetServiceController(name))
-        {
-        }
-        */
     }
 }
