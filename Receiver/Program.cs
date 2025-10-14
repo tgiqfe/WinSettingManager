@@ -1,5 +1,7 @@
+using Receiver.DataContact;
 using Receiver.Lib;
 using System.Diagnostics;
+using System.Text.Json.Nodes;
 using WinSettingManager.Lib.ADDomain;
 using WinSettingManager.Lib.Network;
 using WinSettingManager.Lib.TuneVolume;
@@ -51,10 +53,14 @@ app.MapGet($"{api_v1}/system/logonsessions", () =>
     SystemMethods.GetLogonSessions());
 app.MapGet($"{api_v1}/system/osversion", () =>
     SystemMethods.GetOSVersion());
+
+//  Sound Volume
 app.MapGet($"{api_v1}/system/soundvolume", () =>
     SystemMethods.GetSoundVolume());
-app.MapPost($"{api_v1}/system/soundvolume", (VolumeSummary volSummary) =>
-    SystemMethods.SetSoundVolume(volSummary));
+app.MapPost($"{api_v1}/system/soundvolume", (DataContactTuneVolume contact) =>
+    SystemMethods.SetSoundVolume(contact));
+
+//  Windows Service
 app.MapGet($"{api_v1}/system/services", async () =>
     await SystemMethods.GetServiceSummaries());
 app.MapGet($"{api_v1}/system/services/simple", async () =>
@@ -63,6 +69,7 @@ app.MapGet($"{api_v1}/system/services/{{name}}", async (string name) =>
     await SystemMethods.GetServiceSummary(name));
 app.MapGet($"{api_v1}/system/services/simple/{{name}}", async (string name) =>
     await SystemMethods.GetServiceSimpleSummary(name));
+
 
 
 

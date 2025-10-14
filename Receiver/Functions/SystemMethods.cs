@@ -1,4 +1,5 @@
-﻿using WinSettingManager.Functions;
+﻿using Receiver.DataContact;
+using WinSettingManager.Functions;
 using WinSettingManager.Lib.ADDomain;
 using WinSettingManager.Lib.LogonSession;
 using WinSettingManager.Lib.OSVersion;
@@ -55,16 +56,27 @@ namespace Receiver.Lib
             return $"{os.Name} {os.Edition} [{os.VersionName}]";
         }
 
-        public static VolumeSummary GetSoundVolume()
+        public static DataContactTuneVolume GetSoundVolume()
         {
-            return VolumeSummary.Load();
+            var volSummary = VolumeSummary.Load();
+            return new DataContactTuneVolume()
+            {
+                Level = volSummary.Level,
+                IsMute = volSummary.IsMute
+            };
         }
 
-        public static VolumeSummary SetSoundVolume(VolumeSummary volSummary)
+        public static DataContactTuneVolume SetSoundVolume(DataContactTuneVolume contact)
         {
-            Sound.SetMute(volSummary.IsMute);
-            Sound.SetVolume((float)volSummary.Level / 100);
-            return VolumeSummary.Load();
+            if (contact.Level != null) { Sound.SetVolume((float)contact.Level / 100); }
+            if (contact.IsMute != null) { Sound.SetMute((bool)contact.IsMute); }
+
+            var volSummary = VolumeSummary.Load();
+            return new DataContactTuneVolume()
+            {
+                Level = volSummary.Level,
+                IsMute = volSummary.IsMute
+            };
         }
 
         public static async Task<ServiceSummaryCollection> GetServiceSummaries()
@@ -77,14 +89,14 @@ namespace Receiver.Lib
             return await Task.Run(() => ServiceSimpleSummaryCollection.Load());
         }
 
-        public static async Task<ServiceSummary> GetServiceSummary(string name)
+        public static async Task<ServiceSummaryCollection> GetServiceSummary(string name)
         {
-            return await Task.Run(() => new ServiceSummary(name));
+            return await Task.Run(() => ServiceSummaryCollection.Load(name));
         }
 
-        public static async Task<ServiceSimpleSummary> GetServiceSimpleSummary(string name)
+        public static async Task<ServiceSimpleSummaryCollection> GetServiceSimpleSummary(string name)
         {
-            return await Task.Run(() => new ServiceSimpleSummary(name));
+            return await Task.Run(() => ServiceSimpleSummaryCollection.Load(name));
         }
     }
 }

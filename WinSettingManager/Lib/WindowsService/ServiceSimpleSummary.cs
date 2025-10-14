@@ -32,8 +32,10 @@ namespace WinSettingManager.Lib.WindowsService
             }
         }
 
+        /*
         public ServiceSimpleSummary(string name) : this(ServiceControl.GetServiceController(name))
         {
         }
+        */
     }
 }
