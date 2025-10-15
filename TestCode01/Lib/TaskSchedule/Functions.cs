@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WinSettingManager.Lib.TaskSchedule
 {
-    internal class Functions
+    public class Functions
     {
         public string ConvertToString(TimeSpan ts)
         {

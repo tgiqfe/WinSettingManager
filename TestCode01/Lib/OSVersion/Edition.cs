@@ -3,7 +3,7 @@
     /// <summary>
     /// Version 4.0
     /// </summary>
-    internal enum Edition
+    public enum Edition
     {
         None,
         Home,

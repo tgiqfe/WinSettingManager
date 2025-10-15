@@ -3,7 +3,7 @@
     /// <summary>
     /// Version 4.0
     /// </summary>
-    internal enum OSFamily
+    public enum OSFamily
     {
         Unknown,
         Windows,

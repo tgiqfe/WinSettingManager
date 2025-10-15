@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace WinSettingManager.Lib.OSVersion.Functions
 {
     [SupportedOSPlatform("linux")]
-    internal class LinuxFunctions
+    public class LinuxFunctions
     {
     }
 }

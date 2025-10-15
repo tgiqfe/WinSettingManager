@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace WinSettingManager.Lib.OSVersion.Functions
 {
     [SupportedOSPlatform("macos")]
-    internal class MacOSFunctions
+    public class MacOSFunctions
     {
     }
 }

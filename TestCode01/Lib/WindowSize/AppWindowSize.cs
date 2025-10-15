@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WinSettingManager.Lib.WindowSize
 {
-    internal class AppWindowSize
+    public class AppWindowSize
     {
         /// <summary>
         /// Gets the size of the window with the specified title.

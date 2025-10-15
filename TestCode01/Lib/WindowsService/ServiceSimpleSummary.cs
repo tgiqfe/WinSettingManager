@@ -3,7 +3,7 @@ using WinSettingManager.Functions;
 
 namespace WinSettingManager.Lib.WindowsService
 {
-    public class ServiceSimpleSummary
+    public class ServiceSimpleSummary : BaseServiceSummary
     {
         public string Name { get; set; }
         public string DisplayName { get; set; }
@@ -21,8 +21,8 @@ namespace WinSettingManager.Lib.WindowsService
                 _ => "不明"
             };
 
-            var delay = ServiceControl.IsDelayedAutoStart(sc);
-            var trigger = ServiceControl.IsTriggeredStart(sc);
+            var delay = IsDelayedAutoStart(sc);
+            var trigger = IsTriggeredStart(sc);
             if (delay || trigger)
             {
                 List<string> list = new();

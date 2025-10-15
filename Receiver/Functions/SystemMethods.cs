@@ -32,9 +32,9 @@ namespace Receiver.Lib
             });
         }
 
-        public static Task<DataContactSystemInfo> GetSystemInfoEx()
+        public static async Task<DataContactSystemInfo> GetSystemInfoEx()
         {
-            return Task.Run(() =>
+            return await Task.Run(() =>
             {
                 var sessions = UserLogonSession.GetLoggedOnSession();
                 return new DataContactSystemInfo()
@@ -75,47 +75,8 @@ namespace Receiver.Lib
             return $"{os.Name} {os.Edition} [{os.VersionName}]";
         }
 
-        public static DataContactTuneVolume GetSoundVolume()
-        {
-            var volSummary = VolumeSummary.Load();
-            return new DataContactTuneVolume()
-            {
-                Level = volSummary.Level,
-                IsMute = volSummary.IsMute
-            };
-        }
 
-        public static DataContactTuneVolume SetSoundVolume(DataContactTuneVolume contact)
-        {
-            if (contact.Level != null) { Sound.SetVolume((float)contact.Level / 100); }
-            if (contact.IsMute != null) { Sound.SetMute((bool)contact.IsMute); }
 
-            var volSummary = VolumeSummary.Load();
-            return new DataContactTuneVolume()
-            {
-                Level = volSummary.Level,
-                IsMute = volSummary.IsMute
-            };
-        }
 
-        public static async Task<ServiceSummaryCollection> GetServiceSummaries()
-        {
-            return await Task.Run(() => ServiceSummaryCollection.Load());
-        }
-
-        public static async Task<ServiceSimpleSummaryCollection> GetServiceSimpleSummaries()
-        {
-            return await Task.Run(() => ServiceSimpleSummaryCollection.Load());
-        }
-
-        public static async Task<ServiceSummaryCollection> GetServiceSummary(string name)
-        {
-            return await Task.Run(() => ServiceSummaryCollection.Load(name));
-        }
-
-        public static async Task<ServiceSimpleSummaryCollection> GetServiceSimpleSummary(string name)
-        {
-            return await Task.Run(() => ServiceSimpleSummaryCollection.Load(name));
-        }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WinSettingManager.Lib.TaskSchedule
 {
-    internal class TaskRequire
+    public class TaskRequire
     {
         /// <summary>
         /// 次の間アイドル状態の場合のみタスクを開始する

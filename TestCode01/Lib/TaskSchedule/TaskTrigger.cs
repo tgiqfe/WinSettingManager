@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WinSettingManager.Lib.TaskSchedule
 {
-    internal class TaskTrigger
+    public class TaskTrigger
     {
         public enum TriggerType
         {

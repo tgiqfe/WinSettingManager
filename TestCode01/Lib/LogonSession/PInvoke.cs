@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace WinSettingManager.Lib.LogonSession
 {
-    internal class PInvoke
+    public class PInvoke
     {
         [DllImport("wtsapi32.dll", SetLastError = true)]
-        internal static extern nint WTSOpenServer(string pServerName);
+        public static extern nint WTSOpenServer(string pServerName);
 
         [DllImport("wtsapi32.dll")]
-        internal static extern void WTSCloseServer(nint hServer);
+        public static extern void WTSCloseServer(nint hServer);
 
         [DllImport("wtsapi32.dll", SetLastError = true)]
-        internal static extern int WTSEnumerateSessions(
+        public static extern int WTSEnumerateSessions(
                 nint hServer,
                 int Reserved,
                 int Version,
@@ -24,20 +24,20 @@ namespace WinSettingManager.Lib.LogonSession
                 ref int pCount);
 
         [DllImport("wtsapi32.dll", ExactSpelling = true, SetLastError = false)]
-        internal static extern void WTSFreeMemory(nint memory);
+        public static extern void WTSFreeMemory(nint memory);
 
         [DllImport("Wtsapi32.dll")]
-        internal static extern bool WTSQuerySessionInformation(
+        public static extern bool WTSQuerySessionInformation(
             nint hServer, int sessionId, WTS_INFO_CLASS wtsInfoClass, out nint ppBuffer, out uint pBytesReturned);
 
         [DllImport("wtsapi32.dll", SetLastError = true)]
-        internal static extern bool WTSDisconnectSession(nint hServer, int sessionId, bool bWait);
+        public static extern bool WTSDisconnectSession(nint hServer, int sessionId, bool bWait);
 
         [DllImport("wtsapi32.dll", SetLastError = true)]
-        internal static extern bool WTSLogoffSession(nint hServer, int SessionId, bool bWait);
+        public static extern bool WTSLogoffSession(nint hServer, int SessionId, bool bWait);
 
         [StructLayout(LayoutKind.Sequential)]
-        internal struct WTS_SESSION_INFO
+        public struct WTS_SESSION_INFO
         {
             public int SessionID;
             [MarshalAs(UnmanagedType.LPStr)]
@@ -45,7 +45,7 @@ namespace WinSettingManager.Lib.LogonSession
             public WTS_CONNECTSTATE_CLASS State;
         }
 
-        internal enum WTS_INFO_CLASS
+        public enum WTS_INFO_CLASS
         {
             WTSInitialProgram = 0,
             WTSApplicationName = 1,
@@ -79,7 +79,7 @@ namespace WinSettingManager.Lib.LogonSession
             WTSIsRemoteSession = 29
         }
 
-        internal enum WTS_CONNECTSTATE_CLASS
+        public enum WTS_CONNECTSTATE_CLASS
         {
             WTSActive,
             WTSConnected,
@@ -93,7 +93,7 @@ namespace WinSettingManager.Lib.LogonSession
             WTSInit
         }
 
-        internal struct WTSINFOA
+        public struct WTSINFOA
         {
             public const int WINSTATIONNAME_LENGTH = 32;
             public const int DOMAIN_LENGTH = 17;

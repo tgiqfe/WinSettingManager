@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WinSettingManager.Lib.TaskSchedule
 {
-    internal class TaskAction
+    public class TaskAction
     {
         private readonly Regex pat_arguments = new Regex(@"\s(?=(([^""]*""[^""]*){2})*$)");
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WinSettingManager.Lib.OSVersion.Builder
 {
-    internal class LinuxBuilder
+    public class LinuxBuilder
     {
     }
 }

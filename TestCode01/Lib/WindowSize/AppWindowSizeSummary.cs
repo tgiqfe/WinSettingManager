@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WinSettingManager.Lib.WindowSize
 {
-    internal class AppWindowSizeSummary
+    public class AppWindowSizeSummary
     {
         [DllImport("user32.dll")]
         private static extern bool GetWindowRect(

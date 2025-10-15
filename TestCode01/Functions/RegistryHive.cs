@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WinSettingManager.Lib
 {
-    internal class RegistryHive
+    public class RegistryHive
     {
         #region Local parameters
 

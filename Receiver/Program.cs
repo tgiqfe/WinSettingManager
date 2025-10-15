@@ -1,10 +1,11 @@
 using Receiver.DataContact;
+using Receiver.Functions;
 using Receiver.Lib;
 using System.Diagnostics;
 using System.Reflection.Metadata.Ecma335;
 using System.Text.Json.Nodes;
-using WinSettingManager.Lib.SystemProperties;
 using WinSettingManager.Lib.Network;
+using WinSettingManager.Lib.SystemProperties;
 using WinSettingManager.Lib.TuneVolume;
 
 
@@ -15,6 +16,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+/*
 builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
 {
     options.SerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
@@ -24,6 +26,7 @@ builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options =>
     options.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
 });
 
+*/
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
@@ -43,9 +46,10 @@ app.MapDelete("/", () => "");
 //  v1
 var api_v1 = "/api/v1";
 
+
 //  System Information
 app.MapGet($"{api_v1}/system/info", () =>
-    SystemMethods.GetSystemInfo());
+    SystemMethods.GetSystemInfoEx());
 app.MapGet($"{api_v1}/system/hostname", () =>
     SystemMethods.GetHostName());
 app.MapGet($"{api_v1}/system/domainname", () =>
@@ -56,20 +60,20 @@ app.MapGet($"{api_v1}/system/osversion", () =>
     SystemMethods.GetOSVersion());
 
 //  Sound Volume
-app.MapGet($"{api_v1}/sound/volume", () =>
-    SystemMethods.GetSoundVolume());
-app.MapPost($"{api_v1}/sound/volume", (DataContactTuneVolume contact) =>
-    SystemMethods.SetSoundVolume(contact));
+app.MapGet($"{api_v1}/sound/volume", async () =>
+    await SoundMethods.GetSoundVolume());
+app.MapPost($"{api_v1}/sound/volume", async (DataContactSoundVolume contact) =>
+    await SoundMethods.SetSoundVolume(contact));
 
 //  Windows Service
-app.MapGet($"{api_v1}/system/services", async () =>
-    await SystemMethods.GetServiceSummaries());
-app.MapGet($"{api_v1}/system/services/simple", async () =>
-    await SystemMethods.GetServiceSimpleSummaries());
-app.MapGet($"{api_v1}/system/services/{{name}}", async (string name) =>
-    await SystemMethods.GetServiceSummary(name));
-app.MapGet($"{api_v1}/system/services/simple/{{name}}", async (string name) =>
-    await SystemMethods.GetServiceSimpleSummary(name));
+app.MapGet($"{api_v1}/service/list", async () =>
+    await ServiceMethods.GetServiceSummaries());
+app.MapGet($"{api_v1}/service/list/{{name}}", async (string name) =>
+    await ServiceMethods.GetServiceSummary(name));
+app.MapGet($"{api_v1}/service/simplelist", async () =>
+    await ServiceMethods.GetServiceSimpleSummaries());
+app.MapGet($"{api_v1}/service/simplelist/{{name}}", async (string name) =>
+    await ServiceMethods.GetServiceSimpleSummary(name));
 
 
 app.MapPost($"{api_v1}/registry/key", (HttpRequest req) => "");
@@ -116,7 +120,6 @@ app.MapGet($"{api_v1}/test/command/{{text}}", async (string text) =>
         }
     });
 });
-
 
 
 

@@ -1,8 +1,8 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace WinSettingManager.Functions
+namespace WinSettingManager.Lib.Network
 {
-    public class IPAddressControl
+    public class IPAddressFunctions
     {
         /// <summary>
         /// Prefixlength -> Subnetmask

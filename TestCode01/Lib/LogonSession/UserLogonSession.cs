@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace WinSettingManager.Lib.LogonSession
 {
-    internal class UserLogonSession
+    public class UserLogonSession
     {
         #region Public Parameter
 

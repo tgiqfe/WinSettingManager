@@ -9,7 +9,7 @@ using WinSettingManager.Lib.OSVersion.Functions;
 
 namespace WinSettingManager.Lib.OSVersion
 {
-    internal class OSVersions : List<OSVersion>
+    public class OSVersions : List<OSVersion>
     {
         const string DEFAULT_PATH = "osversions.json";
 

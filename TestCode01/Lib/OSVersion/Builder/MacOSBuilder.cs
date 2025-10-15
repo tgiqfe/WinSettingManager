@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WinSettingManager.Lib.OSVersion.Builder
 {
-    internal class MacOSBuilder
+    public class MacOSBuilder
     {
     }
 }

@@ -8,7 +8,7 @@ using TaskScheduler;
 
 namespace WinSettingManager.Lib.TaskSchedule
 {
-    internal class ScheduledTask
+    public class ScheduledTask
     {
         public TaskGeneral General { get; set; }
         public List<TaskAction> Actions { get; set; }

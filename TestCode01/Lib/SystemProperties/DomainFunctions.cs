@@ -5,9 +5,9 @@ using System.Management;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinSettingManager.Functions
+namespace WinSettingManager.Lib.SystemProperties
 {
-    public class JoinDomainControl
+    public class DomainFunctions
     {
         [Flags]
         enum JoinOptions
@@ -59,7 +59,7 @@ namespace WinSettingManager.Functions
         /// <param name="password"></param>
         /// <param name="ouPath"></param>
         /// <exception cref="InvalidOperationException"></exception>
-        public static void JoinDomain(string domainName, string userName, string password, string? ouPath = null)
+        public static void JoinDomain(string domainName, string userName, string password, string ouPath = null)
         {
             var managementScope = new ManagementScope(@"\\.\root\cimv2");
             managementScope.Connect();

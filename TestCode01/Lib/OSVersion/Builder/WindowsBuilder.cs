@@ -8,7 +8,7 @@ using WinSettingManager.Lib.OSVersion;
 
 namespace WinSettingManager.Lib.OSVersion.Builder
 {
-    internal class WindowsBuilder
+    public class WindowsBuilder
     {
         const int SEED_WINDOWS = 100000;
         const int SEED_WINDOWS_10 = 10;

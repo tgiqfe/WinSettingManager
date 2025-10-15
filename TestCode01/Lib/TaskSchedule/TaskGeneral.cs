@@ -7,7 +7,7 @@ using TaskScheduler;
 
 namespace WinSettingManager.Lib.TaskSchedule
 {
-    internal class TaskGeneral
+    public class TaskGeneral
     {
         /// <summary>
         /// タスクの名前

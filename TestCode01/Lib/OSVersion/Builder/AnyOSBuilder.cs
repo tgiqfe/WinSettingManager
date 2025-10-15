@@ -7,7 +7,7 @@ using WinSettingManager.Lib.OSVersion;
 
 namespace WinSettingManager.Lib.OSVersion.Builder
 {
-    internal class AnyOSBuilder
+    public class AnyOSBuilder
     {
         /// <summary>
         /// Minimum OS

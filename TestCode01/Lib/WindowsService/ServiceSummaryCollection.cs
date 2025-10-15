@@ -1,22 +1,42 @@
 ﻿using System.Management;
 using System.ServiceProcess;
+using WinSettingManager.Functions;
 
 namespace WinSettingManager.Lib.WindowsService
 {
     public class ServiceSummaryCollection
     {
-       public ServiceSummary[] ServiceSummaries { get; set; }
+        public ServiceSummary[] ServiceSummaries { get; set; }
 
-        public static ServiceSummaryCollection Load()
+        public static ServiceSummaryCollection Load(string serviceName = null)
         {
-            var services_sc = ServiceController.GetServices();
-            var services_mo = new ManagementClass("Win32_Service").
+            IEnumerable<ServiceController> services = null;
+            if (serviceName == null)
+            {
+                services = ServiceController.GetServices();
+            }
+            else if (serviceName.Contains("*") || serviceName.Contains("?"))
+            {
+                var regPattern = TextControl.WildcardMatch(serviceName);
+                services = ServiceController.GetServices().
+                    Where(x =>
+                        regPattern.IsMatch(x.ServiceName) || regPattern.IsMatch(x.DisplayName));
+            }
+            else
+            {
+                services = ServiceController.GetServices().
+                    Where(x =>
+                        x.ServiceName.Equals(serviceName, StringComparison.OrdinalIgnoreCase) ||
+                        x.DisplayName.Equals(serviceName, StringComparison.OrdinalIgnoreCase));
+            }
+
+            var wmi_services = new ManagementClass("Win32_Service").
                 GetInstances().
                 OfType<ManagementObject>();
             return new ServiceSummaryCollection()
             {
-                ServiceSummaries = services_sc.
-                    Select(sc => new ServiceSummary(sc, services_mo.FirstOrDefault(mo => sc.ServiceName == mo["Name"] as string))).
+                ServiceSummaries = services.
+                    Select(sc => new ServiceSummary(sc, wmi_services.FirstOrDefault(mo => sc.ServiceName == mo["Name"] as string))).
                     ToArray()
             };
         }

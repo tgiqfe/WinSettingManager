@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WinSettingManager.Lib.TaskSchedule
 {
-    internal class TaskSetting
+    public class TaskSetting
     {
         /// <summary>
         /// タスク要求時に実行する

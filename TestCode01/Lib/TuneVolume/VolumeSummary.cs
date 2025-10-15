@@ -1,6 +1,6 @@
 ﻿namespace WinSettingManager.Lib.TuneVolume
 {
-    internal class VolumeSummary
+    public class VolumeSummary
     {
         public int Level { get; set; }
         public bool IsMute { get; set; }

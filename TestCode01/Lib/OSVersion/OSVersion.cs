@@ -3,7 +3,7 @@
     /// <summary>
     /// Version 4.0
     /// </summary>
-    internal partial class OSVersion
+    public partial class OSVersion
     {
         /// <summary>
         /// OS type. [Windows/Linux/Mac/Any]

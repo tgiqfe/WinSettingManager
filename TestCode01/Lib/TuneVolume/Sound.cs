@@ -8,7 +8,7 @@ using static WinSettingManager.Lib.TuneVolume.PInvoke;
 
 namespace WinSettingManager.Lib.TuneVolume
 {
-    internal class Sound
+    public class Sound
     {
         private static IAudioEndpointVolume Vol()
         {

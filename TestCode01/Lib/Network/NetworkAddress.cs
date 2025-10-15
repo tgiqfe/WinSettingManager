@@ -1,5 +1,4 @@
 ﻿using System.Text.RegularExpressions;
-using WinSettingManager.Functions;
 
 namespace WinSettingManager.Lib.Network
 {
@@ -33,7 +32,7 @@ namespace WinSettingManager.Lib.Network
             if (AddressType == NetworkAddressType.IPv4)
             {
                 this.SubnetMask = ipSubnet;
-                this.PrefixLength = IPAddressControl.SubnetmaskToInt(ipSubnet);
+                this.PrefixLength = IPAddressFunctions.SubnetmaskToInt(ipSubnet);
             }
             else if (AddressType == NetworkAddressType.IPv6)
             {
