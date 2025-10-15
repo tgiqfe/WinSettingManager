@@ -6,7 +6,7 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinSettingManager.Lib.Network
+namespace WinSettingManager.Lib.NetworkInfo
 {
     public class NetworkData
     {

@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WinSettingManager.Lib;
 
-namespace WinSettingManager.Lib.Network
+namespace WinSettingManager.Lib.NetworkInfo
 {
     public class DHCPClientInfo
     {

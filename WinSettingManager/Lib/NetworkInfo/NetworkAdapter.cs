@@ -1,18 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Management;
+﻿using System.Management;
 using System.ServiceProcess;
-using System.Text;
-using System.Threading.Tasks;
+using WinSettingManager.Lib.NetworkInfo;
 
-namespace WinSettingManager.Lib.Network
+namespace WinSettingManager.Lib.NetworkInfo
 {
-    public class NetworkAdapterCollection
+    public class NetworkAdapter
     {
-        public NetworkAdapter[] NetworkAdapters { get; set; }
+        /// <summary>
+        /// Network address information summary.
+        /// </summary>
+        public string InterfaceName { get; set; }
+        public string DeviceName { get; set; }
+        public string DeviceID { get; set; }
+        public bool? Enabled { get; set; }
+        public string MACAddress { get; set; }
+        public NetworkAddressSummary NetworkAddress { get; set; }
+        public NetworkAddressSummary ConfiguredNetworkAddress { get; set; }
+        public DHCPClientInfo DHCPClient { get; set; }
 
-        public static NetworkAdapterCollection Load()
+        public NetworkAdapter(NetworkData networkData)
+        {
+            this.InterfaceName = networkData.NetworkAdapter["Name"]?.ToString();
+            this.DeviceName = networkData.NetworkAdapter["InterfaceDescription"]?.ToString();
+            this.DeviceID = networkData.NetworkAdapter["DeviceID"]?.ToString();
+            this.Enabled = networkData.DeviceService == null ?
+                null :
+                networkData.DeviceService.Status == ServiceControllerStatus.Running;
+            this.MACAddress = networkData.NetworkConfig == null ?
+                null :
+                networkData.NetworkConfig["MACAddress"]?.ToString();
+            this.NetworkAddress = NetworkAddressSummary.LoadFromWMI(networkData.NetworkAdapter, networkData.NetworkConfig);
+            this.ConfiguredNetworkAddress = NetworkAddressSummary.LoadFromRegistry(DeviceID);
+            this.DHCPClient = NetworkAddress == null && ConfiguredNetworkAddress == null ?
+                null :
+                DHCPClientInfo.Load(networkData.NetworkConfig, DeviceID);
+        }
+
+        public static IEnumerable<NetworkAdapter> Load()
         {
             //  Source data for Network adapter.
             var netAdapters = new ManagementClass(
@@ -53,11 +77,7 @@ namespace WinSettingManager.Lib.Network
                     DeviceService = devService
                 });
             }
-
-            return new NetworkAdapterCollection()
-            {
-                NetworkAdapters = list.Select(x => new NetworkAdapter(x)).ToArray()
-            };
+            return list.Select(x => new NetworkAdapter(x));
         }
     }
 }

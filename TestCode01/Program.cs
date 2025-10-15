@@ -8,7 +8,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Unicode;
 using WinSettingManager.Lib.LogonSession;
-using WinSettingManager.Lib.Network;
+using WinSettingManager.Lib.NetworkInfo;
 using WinSettingManager.Lib.OSVersion;
 
 /*

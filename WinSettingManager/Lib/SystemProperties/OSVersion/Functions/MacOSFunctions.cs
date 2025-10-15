@@ -5,7 +5,7 @@ using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinSettingManager.Lib.OSVersion.Functions
+namespace WinSettingManager.Lib.SystemProperties.OSVersion.Functions
 {
     [SupportedOSPlatform("macos")]
     public class MacOSFunctions

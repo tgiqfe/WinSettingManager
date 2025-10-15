@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WinSettingManager.Lib.OSVersion;
+using WinSettingManager.Lib.SystemProperties.OSVersion;
 
-namespace WinSettingManager.Lib.OSVersion.Builder
+namespace WinSettingManager.Lib.SystemProperties.OSVersion.Builder
 {
     public class WindowsServerBuilder
     {

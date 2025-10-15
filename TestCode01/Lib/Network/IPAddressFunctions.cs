@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace WinSettingManager.Lib.Network
+namespace WinSettingManager.Lib.NetworkInfo
 {
     public class IPAddressFunctions
     {

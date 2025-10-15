@@ -4,7 +4,7 @@ using Receiver.Lib;
 using System.Diagnostics;
 using System.Reflection.Metadata.Ecma335;
 using System.Text.Json.Nodes;
-using WinSettingManager.Lib.Network;
+using WinSettingManager.Lib.NetworkInfo;
 using WinSettingManager.Lib.SystemProperties;
 using WinSettingManager.Lib.TuneVolume;
 
@@ -16,17 +16,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-/*
 builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
 {
     options.SerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
+    options.SerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
 });
 builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options =>
 {
     options.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
+    options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
 });
 
-*/
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
@@ -46,18 +46,31 @@ app.MapDelete("/", () => "");
 //  v1
 var api_v1 = "/api/v1";
 
-
 //  System Information
 app.MapGet($"{api_v1}/system/info", () =>
-    SystemMethods.GetSystemInfoEx());
+    SystemMethods.GetSystemInfo());
 app.MapGet($"{api_v1}/system/hostname", () =>
     SystemMethods.GetHostName());
 app.MapGet($"{api_v1}/system/domainname", () =>
     SystemMethods.GetDomainName());
-app.MapGet($"{api_v1}/system/logonsessions", () =>
-    SystemMethods.GetLogonSessions());
 app.MapGet($"{api_v1}/system/osversion", () =>
     SystemMethods.GetOSVersion());
+
+#if DEBUG
+app.MapPost($"{api_v1}/system/exit", () =>
+{
+    Task.Run(() =>
+    {
+        Task.Delay(1000);
+        Environment.Exit(0);
+    }).ConfigureAwait(false);
+    return "";
+});
+#endif
+
+//  Logon Sessions
+app.MapGet($"{api_v1}/logonsession/list", () =>
+    LogonSessionMethods.GetLogonSessions());
 
 //  Sound Volume
 app.MapGet($"{api_v1}/sound/volume", async () =>
@@ -80,20 +93,6 @@ app.MapPost($"{api_v1}/registry/key", (HttpRequest req) => "");
 app.MapPost($"{api_v1}/registry/parameter", (HttpRequest req) => "");
 
 
-
-
-
-#if DEBUG
-app.MapPost($"{api_v1}/system/exit", () =>
-{
-    Task.Run(() =>
-    {
-        Task.Delay(1000);
-        Environment.Exit(0);
-    }).ConfigureAwait(false);
-    return "";
-});
-#endif
 
 //  Network Information
 app.MapGet($"{api_v1}/network/info", async () =>

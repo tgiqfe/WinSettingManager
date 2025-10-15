@@ -1,4 +1,4 @@
-﻿namespace WinSettingManager.Lib.OSVersion
+﻿namespace WinSettingManager.Lib.SystemProperties.OSVersion
 {
     /// <summary>
     /// Version 4.0
