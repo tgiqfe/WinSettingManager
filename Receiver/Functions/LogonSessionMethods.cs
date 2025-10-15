@@ -1,5 +1,6 @@
 ﻿using Receiver.DataContact;
 using WinSettingManager.Lib.LogonSession;
+using static Receiver.DataContact.DataContactLogonSession;
 
 namespace Receiver.Functions
 {
@@ -13,17 +14,34 @@ namespace Receiver.Functions
                 {
                     LoggedOnSessions = UserLogonSession.GetLoggedOnSession().
                         Select(s => new DataContactLogonSession.UserLogonSession_ex()
-                    {
-                        UserName = s.UserName,
-                        UserDomain = s.UserDomain,
-                        SessionID = s.SessionID,
-                        SessionType = s.SessionType,
-                        SessionState = s.SessionState,
-                        ProtocolType = s.ProtocolType,
-                        LogonTime = s.LogonTime
-                    }).ToArray()
+                        {
+                            UserName = s.UserName,
+                            UserDomain = s.UserDomain,
+                            SessionID = s.SessionID,
+                            SessionType = s.SessionType,
+                            SessionState = s.SessionState,
+                            ProtocolType = s.ProtocolType,
+                            LogonTime = s.LogonTime
+                        }).ToArray()
                 };
             });
+        }
+
+        public static async Task<DataContactLogonSession> SetLogonSessions(DataContactLogonSession contact)
+        {
+            switch(contact.Action)
+            {
+                case LogonSessionAction.Disconnect:
+                    break;
+                case LogonSessionAction.Logoff:
+                    break;
+                case LogonSessionAction.Get:
+                case LogonSessionAction.None:
+                default:
+                    break;
+            }
+
+            return await GetLogonSessions();
         }
     }
 }

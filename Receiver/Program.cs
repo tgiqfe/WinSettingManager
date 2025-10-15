@@ -71,6 +71,8 @@ app.MapPost($"{api_v1}/system/exit", () =>
 //  Logon Sessions
 app.MapGet($"{api_v1}/logonsession/list", () =>
     LogonSessionMethods.GetLogonSessions());
+app.MapPost($"{api_v1}/logonsession/user", (DataContactLogonSession contact) =>
+    LogonSessionMethods.SetLogonSessions(contact));
 
 //  Sound Volume
 app.MapGet($"{api_v1}/sound/volume", async () =>
@@ -83,9 +85,9 @@ app.MapGet($"{api_v1}/service/list", async () =>
     await ServiceMethods.GetServiceSummaries());
 app.MapGet($"{api_v1}/service/list/{{name}}", async (string name) =>
     await ServiceMethods.GetServiceSummary(name));
-app.MapGet($"{api_v1}/service/simplelist", async () =>
+app.MapGet($"{api_v1}/service/simple/list", async () =>
     await ServiceMethods.GetServiceSimpleSummaries());
-app.MapGet($"{api_v1}/service/simplelist/{{name}}", async (string name) =>
+app.MapGet($"{api_v1}/service/simple/list/{{name}}", async (string name) =>
     await ServiceMethods.GetServiceSimpleSummary(name));
 
 

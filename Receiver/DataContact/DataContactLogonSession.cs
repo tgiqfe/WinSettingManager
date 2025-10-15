@@ -2,6 +2,14 @@
 {
     public class DataContactLogonSession
     {
+        public enum LogonSessionAction
+        {
+            None,
+            Get,
+            Disconnect,
+            Logoff,
+        }
+
         public class UserLogonSession_ex
         {
             public string UserName { get; set; }
@@ -14,5 +22,6 @@
         }
 
         public UserLogonSession_ex[] LoggedOnSessions { get; set; }
+        public LogonSessionAction Action { get; set; }
     }
 }
