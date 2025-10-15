@@ -1,8 +1,24 @@
 ﻿namespace Receiver.DataContact
 {
+    public enum RegistryAction
+    {
+        None,
+        Get,
+        Set,
+        Owner,
+        Grant,
+        Revoke,
+        Create,
+        Delete,
+        Copy,
+        Move,
+        Load,
+        Unload,
+    }
+
     public class DataContactRegistryKey
     {
-        public DataContactRegistryAction Action { get; set; } = DataContactRegistryAction.None;
+        public RegistryAction Action { get; set; } = RegistryAction.None;
         public string Path { get; set; }
         public string Owner { get; set; }
         public string Account { get; set; }

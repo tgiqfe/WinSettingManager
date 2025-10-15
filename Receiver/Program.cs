@@ -3,7 +3,7 @@ using Receiver.Lib;
 using System.Diagnostics;
 using System.Reflection.Metadata.Ecma335;
 using System.Text.Json.Nodes;
-using WinSettingManager.Lib.ADDomain;
+using WinSettingManager.Lib.SystemProperties;
 using WinSettingManager.Lib.Network;
 using WinSettingManager.Lib.TuneVolume;
 
@@ -56,9 +56,9 @@ app.MapGet($"{api_v1}/system/osversion", () =>
     SystemMethods.GetOSVersion());
 
 //  Sound Volume
-app.MapGet($"{api_v1}/system/soundvolume", () =>
+app.MapGet($"{api_v1}/sound/volume", () =>
     SystemMethods.GetSoundVolume());
-app.MapPost($"{api_v1}/system/soundvolume", (DataContactTuneVolume contact) =>
+app.MapPost($"{api_v1}/sound/volume", (DataContactTuneVolume contact) =>
     SystemMethods.SetSoundVolume(contact));
 
 //  Windows Service

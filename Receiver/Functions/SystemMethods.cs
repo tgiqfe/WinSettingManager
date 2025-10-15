@@ -1,6 +1,5 @@
 ﻿using Receiver.DataContact;
-using WinSettingManager.Functions;
-using WinSettingManager.Lib.ADDomain;
+using WinSettingManager.Lib.SystemProperties;
 using WinSettingManager.Lib.LogonSession;
 using WinSettingManager.Lib.OSVersion;
 using WinSettingManager.Lib.TuneVolume;
@@ -19,8 +18,8 @@ namespace Receiver.Lib
                 return
                     $"OS Version         : {Environment.OSVersion}\n" +
                     $"Machine Name       : {Environment.MachineName}\n" +
-                    $"Is Domain PC       : {JoinDomainControl.IsDomainJoined()}\n" +
-                    $"Domain Name        : {JoinDomainControl.GetDomainName()}\n" +
+                    $"Is Domain PC       : {DomainFunctions.IsDomainJoined()}\n" +
+                    $"Domain Name        : {DomainFunctions.GetDomainName()}\n" +
                     $"User Name          : {userNames}\n" +
                     $"Processor Count    : {Environment.ProcessorCount}\n" +
                     $"System Directory   : {Environment.SystemDirectory}\n" +
@@ -33,6 +32,26 @@ namespace Receiver.Lib
             });
         }
 
+        public static Task<DataContactSystemInfo> GetSystemInfoEx()
+        {
+            return Task.Run(() =>
+            {
+                var sessions = UserLogonSession.GetLoggedOnSession();
+                return new DataContactSystemInfo()
+                {
+                    OSVersion = GetOSVersion(),
+                    MachineName = Environment.MachineName,
+                    IsDomainPC = DomainFunctions.IsDomainJoined(),
+                    DomainName = DomainFunctions.GetDomainName(),
+                    LoggedOnUsers = sessions.Select(s => s.UserName).Distinct().Where(n => !string.IsNullOrEmpty(n)).ToArray(),
+                    ProcessorCount = Environment.ProcessorCount,
+                    SystemMemoryMB = (int)(new Microsoft.VisualBasic.Devices.ComputerInfo().TotalPhysicalMemory / (1024 * 1024)),
+                    Is64BitOS = Environment.Is64BitOperatingSystem,
+                    LogicalDrives = Environment.GetLogicalDrives(),
+                    MachineSerial = ComputerFunctions.GetMachineSerial()
+                };
+            });
+        }
 
 
         public static string GetHostName()
@@ -42,7 +61,7 @@ namespace Receiver.Lib
 
         public static string GetDomainName()
         {
-            return JoinDomainControl.GetDomainName();
+            return DomainFunctions.GetDomainName();
         }
 
         public static IEnumerable<UserLogonSession> GetLogonSessions()

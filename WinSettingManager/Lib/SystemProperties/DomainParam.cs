@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinSettingManager.Lib.ADDomain
+namespace WinSettingManager.Lib.SystemProperties
 {
     public class DomainParam
     {
