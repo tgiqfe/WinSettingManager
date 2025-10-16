@@ -1,7 +1,7 @@
 ﻿using System.Management;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
-using WinSettingManager.Lib;
+using WinSettingManager.Functions;
 
 namespace WinSettingManager.Lib.NetworkInfo
 {
@@ -56,7 +56,7 @@ namespace WinSettingManager.Lib.NetworkInfo
 
             NetworkAddressSummary ret = null;
             string regKeyPath = @$"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\{deviceID}";
-            using (var regKey = RegistryControl.GetRegistryKey(regKeyPath))
+            using (var regKey = RegistryFunctions.GetRegistryKey(regKeyPath))
             {
                 if (regKey != null)
                 {

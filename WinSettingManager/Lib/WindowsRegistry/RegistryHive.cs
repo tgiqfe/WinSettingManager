@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinSettingManager.Lib
+namespace WinSettingManager.Lib.WindowsRegistry
 {
     public class RegistryHive
     {
@@ -38,9 +38,9 @@ namespace WinSettingManager.Lib
             public int Count;
             public TOKEN_PRIV(LUID luid)
             {
-                this.Luid = luid;
-                this.Attr = SE_PRIVILEGE_ENABLED;
-                this.Count = TOKEN_PRIV_COUNT;
+                Luid = luid;
+                Attr = SE_PRIVILEGE_ENABLED;
+                Count = TOKEN_PRIV_COUNT;
             }
         }
 

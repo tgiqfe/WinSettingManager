@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinSettingManager.Lib.MemoryDump
+namespace WinSettingManager.Lib.SystemProperties.MemoryDump
 {
     public enum PagingFileSizeType
     {

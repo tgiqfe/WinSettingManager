@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Win32;
 using System.IO;
 
-namespace WinSettingManager.Lib.MemoryDump
+namespace WinSettingManager.Lib.SystemProperties.MemoryDump
 {
     public class PagingFileSetting
     {
@@ -25,7 +25,7 @@ namespace WinSettingManager.Lib.MemoryDump
         /// </summary>
         public void Init()
         {
-            this.AutoManage = true;
+            AutoManage = true;
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace WinSettingManager.Lib.MemoryDump
             using (RegistryKey regKey = Registry.LocalMachine.OpenSubKey(memoryManagement, false))
             {
                 string[] tempPagingFiles = regKey.GetValue(name_PAGINGFILES, "") as string[];
-                this.AutoManage =
+                AutoManage =
                     tempPagingFiles.Length == 1 && tempPagingFiles[0] == @"?:\pagefile.sys";
                 if (!AutoManage)
                 {
@@ -56,7 +56,7 @@ namespace WinSettingManager.Lib.MemoryDump
                             pagingFileList.Add(pagingFile);
                         }
                     }
-                    this.PagingFiles = pagingFileList;
+                    PagingFiles = pagingFileList;
                 }
             }
         }
@@ -71,13 +71,13 @@ namespace WinSettingManager.Lib.MemoryDump
 
             using (RegistryKey regKey = Registry.LocalMachine.OpenSubKey(memoryManagement, true))
             {
-                if (this.AutoManage)
+                if (AutoManage)
                 {
                     regKey.SetValue(name_PAGINGFILES, new string[1] { @"?:\pagefile.sys" }, RegistryValueKind.MultiString);
                 }
                 else
                 {
-                    string[] pageFiles = this.PagingFiles.
+                    string[] pageFiles = PagingFiles.
                         Where(x => !string.IsNullOrEmpty(x.FilePath)).
                         Select(x => string.Format("{0} {1} {2}", x.FilePath, x.MinimumSize, x.MaximumSize)).
                         ToArray();

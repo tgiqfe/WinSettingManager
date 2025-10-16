@@ -17,7 +17,7 @@ namespace WinSettingManager.Lib.WindowsService
             }
             else if (serviceName.Contains("*") || serviceName.Contains("?"))
             {
-                var regPattern = TextControl.WildcardMatch(serviceName);
+                var regPattern = TextFunctions.WildcardMatch(serviceName);
                 services = ServiceController.GetServices().
                     Where(x =>
                         regPattern.IsMatch(x.ServiceName) || regPattern.IsMatch(x.DisplayName));

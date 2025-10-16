@@ -4,25 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinSettingManager.Lib.MemoryDump
+namespace WinSettingManager.Lib.SystemProperties.MemoryDump
 {
     public class PagingFile
     {
         private string _driveName = null;
         public string DriveName
         {
-            get { return this._driveName; }
-            set { this._driveName = value.ToUpper().TrimEnd('\\'); }
+            get { return _driveName; }
+            set { _driveName = value.ToUpper().TrimEnd('\\'); }
         }
         public PagingFileSizeType Type
         {
             get
             {
-                if (string.IsNullOrEmpty(this.FilePath))
+                if (string.IsNullOrEmpty(FilePath))
                 {
                     return PagingFileSizeType.None;
                 }
-                else if (this.MinimumSize == 0 && this.MaximumSize == 0)
+                else if (MinimumSize == 0 && MaximumSize == 0)
                 {
                     return PagingFileSizeType.SystemManage;
                 }

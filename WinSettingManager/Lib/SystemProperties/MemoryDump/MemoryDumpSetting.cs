@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Win32;
 using System.IO;
 
-namespace WinSettingManager.Lib.MemoryDump
+namespace WinSettingManager.Lib.SystemProperties.MemoryDump
 {
     /// <summary>
     /// 参考)
@@ -42,13 +42,13 @@ namespace WinSettingManager.Lib.MemoryDump
         /// </summary>
         public void Init()
         {
-            this.Type = DumpType.Automatic;
-            this.DumpFilePath = @"%SystemRoot%\MEMORY.DMP";
-            this.MiniDumpDir = @"%SystemRoot%\Minidump";
-            this.WriteSystemLog = true;
-            this.AutoReboot = true;
-            this.OverwriteExistingFile = true;
-            this.DisableAutomaticDelation = false;
+            Type = DumpType.Automatic;
+            DumpFilePath = @"%SystemRoot%\MEMORY.DMP";
+            MiniDumpDir = @"%SystemRoot%\Minidump";
+            WriteSystemLog = true;
+            AutoReboot = true;
+            OverwriteExistingFile = true;
+            DisableAutomaticDelation = false;
         }
 
         /// <summary>
@@ -61,25 +61,25 @@ namespace WinSettingManager.Lib.MemoryDump
                 int dumpParam = (int)regKey.GetValue(name_CRASHDUMPENABLED, 0);
                 switch (dumpParam)
                 {
-                    case 0: this.Type = DumpType.None; break;
+                    case 0: Type = DumpType.None; break;
                     case 1:
                         //  CrashDumpEnabledが「1」で、FilterPagesが「1」ならばアクティブメモリダンプ
                         int filterPageParam = (int)regKey.GetValue(name_FILTERPAGES, 0);
-                        this.Type = filterPageParam == 1 ?
+                        Type = filterPageParam == 1 ?
                             DumpType.Active :
                             DumpType.Complete;
                         break;
-                    case 2: this.Type = DumpType.Kernel; break;
-                    case 3: this.Type = DumpType.Small; break;
-                    case 7: this.Type = DumpType.Automatic; break;
+                    case 2: Type = DumpType.Kernel; break;
+                    case 3: Type = DumpType.Small; break;
+                    case 7: Type = DumpType.Automatic; break;
                 }
 
-                this.DumpFilePath = regKey.GetValue(name_DUMPFILE, "", RegistryValueOptions.DoNotExpandEnvironmentNames) as string;
-                this.MiniDumpDir = regKey.GetValue(name_MINIDUMPDIR, "", RegistryValueOptions.DoNotExpandEnvironmentNames) as string;
-                this.WriteSystemLog = (int)regKey.GetValue(name_LOGEVENT, 1) == 1;
-                this.AutoReboot = (int)regKey.GetValue(name_AUTOREBOOT, 1) == 1;
-                this.OverwriteExistingFile = (int)regKey.GetValue(name_OVERWRITE, 1) == 1;
-                this.DisableAutomaticDelation = (int)regKey.GetValue(name_ALWAYSKEEPMEMORYDUMP, 0) == 1;
+                DumpFilePath = regKey.GetValue(name_DUMPFILE, "", RegistryValueOptions.DoNotExpandEnvironmentNames) as string;
+                MiniDumpDir = regKey.GetValue(name_MINIDUMPDIR, "", RegistryValueOptions.DoNotExpandEnvironmentNames) as string;
+                WriteSystemLog = (int)regKey.GetValue(name_LOGEVENT, 1) == 1;
+                AutoReboot = (int)regKey.GetValue(name_AUTOREBOOT, 1) == 1;
+                OverwriteExistingFile = (int)regKey.GetValue(name_OVERWRITE, 1) == 1;
+                DisableAutomaticDelation = (int)regKey.GetValue(name_ALWAYSKEEPMEMORYDUMP, 0) == 1;
             }
         }
 
@@ -92,7 +92,7 @@ namespace WinSettingManager.Lib.MemoryDump
             {
                 //  ダンプ出力の種類
                 int paramValue = 0;
-                switch (this.Type)
+                switch (Type)
                 {
                     case DumpType.None: paramValue = 0; break;
                     case DumpType.Complete: paramValue = 1; break;
@@ -103,7 +103,7 @@ namespace WinSettingManager.Lib.MemoryDump
                     default: paramValue = 7; break;
                 }
                 regKey.SetValue(name_CRASHDUMPENABLED, paramValue, RegistryValueKind.DWord);
-                if (this.Type == DumpType.Active)
+                if (Type == DumpType.Active)
                 {
                     regKey.SetValue(name_FILTERPAGES, 1, RegistryValueKind.DWord);
                 }
@@ -113,28 +113,28 @@ namespace WinSettingManager.Lib.MemoryDump
                 }
 
                 //  ダンプ出力先ファイルのパス
-                regKey.SetValue(name_DUMPFILE, this.DumpFilePath, RegistryValueKind.ExpandString);
-                string dumpFileDir = Path.GetDirectoryName(this.DumpFilePath);
+                regKey.SetValue(name_DUMPFILE, DumpFilePath, RegistryValueKind.ExpandString);
+                string dumpFileDir = Path.GetDirectoryName(DumpFilePath);
                 if (!Directory.Exists(dumpFileDir))
                 {
                     Directory.CreateDirectory(dumpFileDir);
                 }
 
                 //  最小ダンプの出力先フォルダー
-                regKey.SetValue(name_MINIDUMPDIR, this.MiniDumpDir, RegistryValueKind.ExpandString);
+                regKey.SetValue(name_MINIDUMPDIR, MiniDumpDir, RegistryValueKind.ExpandString);
 
                 //  システムログにイベントを書き込む
-                regKey.SetValue(name_LOGEVENT, this.WriteSystemLog ? 1 : 0, RegistryValueKind.DWord);
+                regKey.SetValue(name_LOGEVENT, WriteSystemLog ? 1 : 0, RegistryValueKind.DWord);
 
                 //  自動的に再起動
-                regKey.SetValue(name_AUTOREBOOT, this.AutoReboot ? 1 : 0, RegistryValueKind.DWord);
+                regKey.SetValue(name_AUTOREBOOT, AutoReboot ? 1 : 0, RegistryValueKind.DWord);
 
                 //  既存のファイルに上書き
-                regKey.SetValue(name_OVERWRITE, this.OverwriteExistingFile ? 1 : 0, RegistryValueKind.DWord);
+                regKey.SetValue(name_OVERWRITE, OverwriteExistingFile ? 1 : 0, RegistryValueKind.DWord);
 
                 //  ディスク領域が少ないときでもメモリダンプの自動削除を無効
                 //  (自動削除しない)
-                regKey.SetValue(name_ALWAYSKEEPMEMORYDUMP, this.DisableAutomaticDelation ? 1 : 0, RegistryValueKind.DWord);
+                regKey.SetValue(name_ALWAYSKEEPMEMORYDUMP, DisableAutomaticDelation ? 1 : 0, RegistryValueKind.DWord);
             }
         }
     }

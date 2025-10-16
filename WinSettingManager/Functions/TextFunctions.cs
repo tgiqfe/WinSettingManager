@@ -2,7 +2,7 @@
 
 namespace WinSettingManager.Functions
 {
-    internal class TextControl
+    internal class TextFunctions
     {
         public static Regex WildcardMatch(string text)
         {

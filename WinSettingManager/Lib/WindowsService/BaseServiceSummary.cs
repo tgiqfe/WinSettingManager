@@ -5,6 +5,7 @@ using System.Management;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
+using WinSettingManager.Functions;
 
 namespace WinSettingManager.Lib.WindowsService
 {
@@ -22,7 +23,7 @@ namespace WinSettingManager.Lib.WindowsService
             if (mo == null)
             {
                 var keyPath = @"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services";
-                using (var regKey = RegistryControl.GetRegistryKey(keyPath, false))
+                using (var regKey = RegistryFunctions.GetRegistryKey(keyPath, false))
                 {
                     if (regKey != null)
                     {
@@ -57,7 +58,7 @@ namespace WinSettingManager.Lib.WindowsService
         {
             if (sc == null) return false;
             var keyPath = @"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services";
-            using (var regKey = RegistryControl.GetRegistryKey(keyPath, false))
+            using (var regKey = RegistryFunctions.GetRegistryKey(keyPath, false))
             {
                 if (regKey != null)
                 {
