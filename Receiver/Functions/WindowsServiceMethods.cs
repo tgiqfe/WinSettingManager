@@ -83,6 +83,7 @@ namespace Receiver.Functions
                         {
                             Name = x.Name,
                             DisplayName = x.DisplayName,
+                            Status = x.Status,
                             StartupType = x.StartupType,
                         }).ToArray();
                 })

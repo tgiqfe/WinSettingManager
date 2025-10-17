@@ -7,14 +7,26 @@ namespace WinSettingManager.Lib.WindowsService
     {
         public string Name { get; set; }
         public string DisplayName { get; set; }
+        public string Status { get; set; }
         public string StartupType { get; set; }
-
+        
         public ServiceSimpleSummary(ServiceController sc)
         {
             _sc = sc;
 
             this.Name = sc.ServiceName;
             this.DisplayName = sc.DisplayName;
+            this.Status = sc.Status switch
+            {
+                ServiceControllerStatus.Running => "実行中",
+                ServiceControllerStatus.Stopped => "停止",
+                ServiceControllerStatus.Paused => "一時中断",
+                ServiceControllerStatus.StartPending => "開始中",
+                ServiceControllerStatus.StopPending => "停止中",
+                ServiceControllerStatus.PausePending => "一時中断保留中",
+                ServiceControllerStatus.ContinuePending => "継続保留中",
+                _ => "不明"
+            };
             this.StartupType = sc.StartType switch
             {
                 ServiceStartMode.Automatic => "自動",
