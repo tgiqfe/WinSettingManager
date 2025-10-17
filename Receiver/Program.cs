@@ -1,42 +1,19 @@
 using Microsoft.Extensions.Hosting.WindowsServices;
+using Receiver;
 using Receiver.DataContact;
 using Receiver.Functions;
 using System.Diagnostics;
 
+//  Initialize Web Application.
+var app = WebAppSetup.Initialize(args);
 
-//  Prepare Web Application.
-var builder = WebApplication.CreateBuilder(args);
+//  api v1 text
+var api_v1 = "/api/v1";
 
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+//  ################################################################
+//  ##                      API Endpoints                         ##
+//  ################################################################
 
-builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
-{
-    options.SerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
-    options.SerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
-});
-builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options =>
-{
-    options.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
-    options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
-});
-builder.Services.AddWindowsService(options =>
-{
-    options.ServiceName = "WinSetMng";
-});
-if (WindowsServiceHelpers.IsWindowsService())
-{
-    builder.Services.AddSingleton<IHostLifetime, Receiver.ServiceLifeTime>();
-}
-
-
-var app = builder.Build();
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 
 // empty route handlers
 #if DEBUG
@@ -46,23 +23,17 @@ app.MapPut("/", () => "");
 app.MapDelete("/", () => "");
 #endif
 
-//  api setting
-//  v1
-var api_v1 = "/api/v1";
-
-//  System Information
-app.MapGet($"{api_v1}/system/info", () =>
-    SystemMethods.GetSystemInfoAsync());
-
-
-
-
+//  Application Information
 app.MapGet($"{api_v1}/application/version", async () =>
     await ApplicationMethods.GetVersionAsync());
 app.MapGet($"{api_v1}/application/exit", () =>
     ApplicationMethods.ExitApplicationAsync());
 app.MapPost($"{api_v1}/application/exit", () =>
     ApplicationMethods.ExitApplicationAsync());
+
+//  System Information
+app.MapGet($"{api_v1}/system/info", () =>
+    SystemMethods.GetSystemInfoAsync());
 
 //  Local User Account
 app.MapGet($"{api_v1}/localaccount/user/list", () =>
@@ -97,7 +68,13 @@ app.MapGet($"{api_v1}/service/simple/list", async () =>
 app.MapGet($"{api_v1}/service/simple/list/{{name}}", async (string name) =>
     await WindowsServiceMethods.GetServiceSimpleSummariesAsync(name));
 
+//  service/start
+//  service/stop
+//  service/restart
+//  service/starttype
 
+
+//  Windows Registry
 app.MapPost($"{api_v1}/registry/key", (HttpRequest req) => "");
 app.MapPost($"{api_v1}/registry/parameter", (HttpRequest req) => "");
 
@@ -129,9 +106,4 @@ app.MapGet($"{api_v1}/test/command/{{text}}", async (string text) =>
     });
 });
 
-
-
-
 app.Run("http://*:5000");
-
-
