@@ -78,6 +78,9 @@ app.MapGet($"{api_v1}/localaccount/user/list", () =>
 app.MapGet($"{api_v1}/localaccount/group/list", () =>
     LocalAccountMethods.GetLocalGroups());
 
+//  localaccount/user/add/{{name}}
+
+
 //  Logon Sessions
 app.MapGet($"{api_v1}/logonsession/list", () =>
     LogonSessionMethods.GetLogonSessions());

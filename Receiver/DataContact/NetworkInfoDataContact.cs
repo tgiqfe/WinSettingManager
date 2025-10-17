@@ -1,6 +1,6 @@
 ﻿namespace Receiver.DataContact
 {
-    public class DataContactNetworkInfo
+    public class NetworkInfoDataContact
     {
         public string InterfaceName { get; set; }
         public string DeviceName { get; set; }

@@ -16,7 +16,7 @@
         Unload,
     }
 
-    public class DataContactRegistry
+    public class RegistryDataContact
     {
         public RegistryAction Action { get; set; } = RegistryAction.None;
         public string Key { get; set; }

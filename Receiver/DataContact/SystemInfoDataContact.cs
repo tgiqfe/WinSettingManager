@@ -1,6 +1,6 @@
 ﻿namespace Receiver.DataContact
 {
-    public class DataContactSystemInfo
+    public class SystemInfoDataContact
     {
         public string OSVersion { get; set; }
         public string MachineName { get; set; }

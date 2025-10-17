@@ -1,6 +1,6 @@
 ﻿namespace Receiver.DataContact
 {
-    public class DataContactSoundVolume
+    public class SoundVolumeDataContact
     {
         public int? Level { get; set; }
         public bool? IsMute { get; set; }

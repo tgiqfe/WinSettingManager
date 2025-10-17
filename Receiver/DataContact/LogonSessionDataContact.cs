@@ -1,6 +1,6 @@
 ﻿namespace Receiver.DataContact
 {
-    public class DataContactLogonSession
+    public class LogonSessionDataContact
     {
         public enum LogonSessionAction
         {
