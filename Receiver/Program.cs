@@ -1,12 +1,7 @@
+using Microsoft.Extensions.Hosting.WindowsServices;
 using Receiver.DataContact;
 using Receiver.Functions;
-using Receiver.Lib;
 using System.Diagnostics;
-using System.Reflection.Metadata.Ecma335;
-using System.Text.Json.Nodes;
-using WinSettingManager.Lib.NetworkInfo;
-using WinSettingManager.Lib.SystemProperties;
-using WinSettingManager.Lib.TuneVolume;
 
 
 //  Prepare Web Application.
@@ -26,6 +21,15 @@ builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options =>
     options.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
     options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
 });
+builder.Services.AddWindowsService(options =>
+{
+    options.ServiceName = "WinSetMng";
+});
+if (WindowsServiceHelpers.IsWindowsService())
+{
+    builder.Services.AddSingleton<IHostLifetime, Receiver.ServiceLifeTime>();
+}
+
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())

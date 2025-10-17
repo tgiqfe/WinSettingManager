@@ -5,7 +5,7 @@ using WinSettingManager.Lib.TuneVolume;
 using WinSettingManager.Lib.WindowsService;
 using WinSettingManager.Lib.SystemProperties.OSVersion;
 
-namespace Receiver.Lib
+namespace Receiver.Functions
 {
     public class SystemMethods
     {

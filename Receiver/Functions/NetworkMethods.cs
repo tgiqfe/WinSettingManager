@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using WinSettingManager.Lib.NetworkInfo;
 
-namespace Receiver.Lib
+namespace Receiver.Functions
 {
     public class NetworkMethods
     {
