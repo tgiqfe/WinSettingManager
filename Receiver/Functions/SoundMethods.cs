@@ -1,5 +1,5 @@
 ﻿using Receiver.DataContact;
-using WinSettingManager.Lib.TuneVolume;
+using WinSettingManager.Lib.SoundVolume;
 
 namespace Receiver.Functions
 {

@@ -8,17 +8,6 @@ namespace WinSettingManager.Lib.WindowsService
     {
         public ServiceSimpleSummary[] ServiceSimpleSummaries { get; set; }
 
-        /*
-        public static ServiceSimpleSummaryCollection Load()
-        {
-            var services = ServiceController.GetServices();
-            return new ServiceSimpleSummaryCollection()
-            {
-                ServiceSimpleSummaries = services.Select(x => new ServiceSimpleSummary(x)).ToArray()
-            };
-        }
-        */
-
         public static ServiceSimpleSummaryCollection Load(string serviceName = null)
         {
             IEnumerable<ServiceController> services = null;
@@ -45,23 +34,6 @@ namespace WinSettingManager.Lib.WindowsService
             {
                 ServiceSimpleSummaries = services.Select(x => new ServiceSimpleSummary(x)).ToArray()
             };
-
-            /*
-            Regex willdcardMatch(string text)
-            {
-                string patternString = Regex.Replace(text, ".",
-                    x =>
-                    {
-                        string y = x.Value;
-                        if (y.Equals("?")) { return "."; }
-                        else if (y.Equals("*")) { return ".*"; }
-                        else { return Regex.Escape(y); }
-                    });
-                if (!patternString.StartsWith("*")) { patternString = "^" + patternString; }
-                if (!patternString.EndsWith("*")) { patternString = patternString + "$"; }
-                return new Regex(patternString, RegexOptions.IgnoreCase);
-            }
-            */
         }
     }
 }

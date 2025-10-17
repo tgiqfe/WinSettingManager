@@ -19,7 +19,10 @@ namespace WinSettingManager.Lib.WindowsService
 
         public ServiceSummary(ServiceController sc, ManagementObject mo = null)
         {
-            mo ??= new ManagementClass("Win32_Service").
+            _sc = sc;
+            _mo = mo;
+
+            _mo ??= new ManagementClass("Win32_Service").
                 GetInstances().
                 OfType<ManagementObject>().
                 FirstOrDefault(x => sc.ServiceName == x["Name"] as string);
@@ -28,8 +31,8 @@ namespace WinSettingManager.Lib.WindowsService
             this.DisplayName = sc.DisplayName;
             this.Status = sc.Status;
             this.StartupType = sc.StartType;
-            this.TriggerStart = IsTriggeredStart(sc);
-            this.TriggerStart = IsDelayedAutoStart(sc, mo);
+            this.TriggerStart = IsTriggeredStart();
+            this.TriggerStart = IsDelayedAutoStart();
             if (mo != null)
             {
                 this.ExecutePath = mo["PathName"] as string;

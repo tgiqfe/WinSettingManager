@@ -11,6 +11,8 @@ namespace WinSettingManager.Lib.WindowsService
 
         public ServiceSimpleSummary(ServiceController sc)
         {
+            _sc = sc;
+
             this.Name = sc.ServiceName;
             this.DisplayName = sc.DisplayName;
             this.StartupType = sc.StartType switch
@@ -21,8 +23,8 @@ namespace WinSettingManager.Lib.WindowsService
                 _ => "不明"
             };
 
-            var delay = IsDelayedAutoStart(sc);
-            var trigger = IsTriggeredStart(sc);
+            var delay = IsDelayedAutoStart();
+            var trigger = IsTriggeredStart();
             if (delay || trigger)
             {
                 List<string> list = new();
