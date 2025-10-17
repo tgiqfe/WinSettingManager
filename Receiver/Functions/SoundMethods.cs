@@ -5,7 +5,7 @@ namespace Receiver.Functions
 {
     public class SoundMethods
     {
-        public static async Task<SoundVolumeDataContact> GetSoundVolume()
+        public static async Task<SoundVolumeDataContact> GetSoundVolumeAsync()
         {
             return await Task.Run(() =>
             {
@@ -18,7 +18,7 @@ namespace Receiver.Functions
             });
         }
 
-        public static async Task<SoundVolumeDataContact> SetSoundVolume(SoundVolumeDataContact contact)
+        public static async Task<SoundVolumeDataContact> SetSoundVolumeAsync(SoundVolumeDataContact contact)
         {
             return await Task.Run(() =>
             {

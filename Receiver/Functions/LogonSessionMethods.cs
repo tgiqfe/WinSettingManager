@@ -6,7 +6,7 @@ namespace Receiver.Functions
 {
     public class LogonSessionMethods
     {
-        public static async Task<LogonSessionDataContact> GetLogonSessions()
+        public static async Task<LogonSessionDataContact> GetLogonSessionsAsync()
         {
             return await Task.Run(() =>
             {
@@ -27,7 +27,7 @@ namespace Receiver.Functions
             });
         }
 
-        public static async Task<LogonSessionDataContact> SetLogonSessions(LogonSessionDataContact contact)
+        public static async Task<LogonSessionDataContact> SetLogonSessionsAsync(LogonSessionDataContact contact)
         {
             switch(contact.Action)
             {
@@ -41,7 +41,7 @@ namespace Receiver.Functions
                     break;
             }
 
-            return await GetLogonSessions();
+            return await GetLogonSessionsAsync();
         }
     }
 }

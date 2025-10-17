@@ -5,7 +5,7 @@ namespace Receiver.Functions
 {
     public class LocalAccountMethods
     {
-        public static async Task<LocalAccountDataContact> GetLocalUsers()
+        public static async Task<LocalAccountDataContact> GetLocalUsersAsync()
         {
             return await Task.Run(() =>
             {
@@ -33,7 +33,7 @@ namespace Receiver.Functions
             });
         }
 
-        public static async Task<LocalAccountDataContact> GetLocalGroups()
+        public static async Task<LocalAccountDataContact> GetLocalGroupsAsync()
         {
             return await Task.Run(() =>
             {

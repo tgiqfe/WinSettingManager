@@ -13,14 +13,15 @@ namespace Receiver.Functions
         /// Get System Information
         /// </summary>
         /// <returns></returns>
-        public static async Task<SystemInfoDataContact> GetSystemInfo()
+        public static async Task<SystemInfoDataContact> GetSystemInfoAsync()
         {
             return await Task.Run(() =>
             {
+                var os = OSVersions.GetCurrent();
                 var sessions = UserLogonSession.GetLoggedOnSession();
                 return new SystemInfoDataContact()
                 {
-                    OSVersion = GetOSVersion(),
+                    OSVersion = os.ToString(),
                     MachineName = Environment.MachineName,
                     IsDomainPC = DomainFunctions.IsDomainJoined(),
                     DomainName = DomainFunctions.GetDomainName(),
@@ -32,34 +33,6 @@ namespace Receiver.Functions
                     MachineSerial = ComputerFunctions.GetMachineSerial()
                 };
             });
-        }
-
-        /// <summary>
-        /// Get hostname
-        /// </summary>
-        /// <returns></returns>
-        public static string GetHostName()
-        {
-            return Environment.MachineName;
-        }
-
-        /// <summary>
-        /// Get domain name or workgroup name
-        /// </summary>
-        /// <returns></returns>
-        public static string GetDomainName()
-        {
-            return DomainFunctions.GetDomainName();
-        }
-
-        /// <summary>
-        /// Get OS version
-        /// </summary>
-        /// <returns></returns>
-        public static string GetOSVersion()
-        {
-            var os = OSVersions.GetCurrent();
-            return $"{os.Name} {os.Edition} [{os.VersionName}]";
         }
     }
 }
