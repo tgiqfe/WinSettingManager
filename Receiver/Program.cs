@@ -68,6 +68,12 @@ app.MapPost($"{api_v1}/system/exit", () =>
 });
 #endif
 
+//  Local User Account
+app.MapGet($"{api_v1}/localaccount/user/list", () =>
+    LocalAccountMethods.GetLocalUsers());
+app.MapGet($"{api_v1}/localaccount/group/list", () =>
+    LocalAccountMethods.GetLocalGroups());
+
 //  Logon Sessions
 app.MapGet($"{api_v1}/logonsession/list", () =>
     LogonSessionMethods.GetLogonSessions());

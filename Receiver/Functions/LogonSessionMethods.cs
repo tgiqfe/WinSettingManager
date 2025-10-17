@@ -12,8 +12,8 @@ namespace Receiver.Functions
             {
                 return new DataContactLogonSession()
                 {
-                    LoggedOnSessions = UserLogonSession.GetLoggedOnSession().
-                        Select(s => new DataContactLogonSession.UserLogonSession_ex()
+                    LoggedOnSessions = WinSettingManager.Lib.LogonSession.UserLogonSession.GetLoggedOnSession().
+                        Select(s => new DataContactLogonSession.UserLogonSession()
                         {
                             UserName = s.UserName,
                             UserDomain = s.UserDomain,

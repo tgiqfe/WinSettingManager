@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace WinSettingManager.Lib.LocalAccount
 {
-    internal class LocalUser
+    public class LocalUser
     {
         public string Name { get; set; }
+        public string FullName { get; set; }
         public string Description { get; set; }
         public bool UserMustChangePasswordAtNextLogon { get; set; }
         public bool UserCannotChangePassword { get; set; }

@@ -10,7 +10,7 @@
             Logoff,
         }
 
-        public class UserLogonSession_ex
+        public class UserLogonSession
         {
             public string UserName { get; set; }
             public string UserDomain { get; set; }
@@ -21,7 +21,7 @@
             public DateTime? LogonTime { get; set; }
         }
 
-        public UserLogonSession_ex[] LoggedOnSessions { get; set; }
+        public UserLogonSession[] LoggedOnSessions { get; set; }
         public LogonSessionAction Action { get; set; }
     }
 }
