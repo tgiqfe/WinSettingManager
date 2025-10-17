@@ -4,6 +4,7 @@ using WinSettingManager.Functions;
 
 namespace WinSettingManager.Lib.WindowsService
 {
+    /*
     public class ServiceSimpleSummaryCollection
     {
         public ServiceSimpleSummary[] ServiceSimpleSummaries { get; set; }
@@ -36,4 +37,5 @@ namespace WinSettingManager.Lib.WindowsService
             };
         }
     }
+    */
 }

@@ -92,13 +92,13 @@ app.MapPost($"{api_v1}/sound/volume", async (DataContactSoundVolume contact) =>
 
 //  Windows Service
 app.MapGet($"{api_v1}/service/list", async () =>
-    await ServiceMethods.GetServiceSummaries());
+    await WindowsServiceMethods.GetServiceSummaries());
 app.MapGet($"{api_v1}/service/list/{{name}}", async (string name) =>
-    await ServiceMethods.GetServiceSummary(name));
+    await WindowsServiceMethods.GetServiceSummaries(name));
 app.MapGet($"{api_v1}/service/simple/list", async () =>
-    await ServiceMethods.GetServiceSimpleSummaries());
+    await WindowsServiceMethods.GetServiceSimpleSummaries());
 app.MapGet($"{api_v1}/service/simple/list/{{name}}", async (string name) =>
-    await ServiceMethods.GetServiceSimpleSummary(name));
+    await WindowsServiceMethods.GetServiceSimpleSummaries(name));
 
 
 app.MapPost($"{api_v1}/registry/key", (HttpRequest req) => "");

@@ -33,5 +33,30 @@ namespace WinSettingManager.Lib.WindowsService
                 this.StartupType += " (" + string.Join(",", list) + ")";
             }
         }
+
+        public static ServiceSimpleSummary[] Load(string serviceName = null)
+        {
+            IEnumerable<ServiceController> services = null;
+            if (serviceName == null)
+            {
+                services = ServiceController.GetServices();
+            }
+            else if (serviceName.Contains("*") || serviceName.Contains("?"))
+            {
+                var regPattern = TextFunctions.WildcardMatch(serviceName);
+                services = ServiceController.GetServices().
+                    Where(x =>
+                        regPattern.IsMatch(x.ServiceName) || regPattern.IsMatch(x.DisplayName));
+            }
+            else
+            {
+                services = ServiceController.GetServices().
+                    Where(x =>
+                        x.ServiceName.Equals(serviceName, StringComparison.OrdinalIgnoreCase) ||
+                        x.DisplayName.Equals(serviceName, StringComparison.OrdinalIgnoreCase));
+            }
+
+            return services.Select(x => new ServiceSimpleSummary(x)).ToArray();
+        }
     }
 }
