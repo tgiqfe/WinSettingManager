@@ -5,14 +5,14 @@ namespace Receiver.Functions
 {
     public class LocalAccountMethods
     {
-        public static async Task<DataContactLocalAccount> GetLocalUsers()
+        public static async Task<LocalAccountDataContact> GetLocalUsers()
         {
             return await Task.Run(() =>
             {
-                return new DataContactLocalAccount()
+                return new LocalAccountDataContact()
                 {
                     LocalUsers = LocalUser.Load().
-                        Select(x => new DataContactLocalAccount.LocalUser()
+                        Select(x => new LocalAccountDataContact.LocalUser()
                         {
                             Name = x.Name,
                             FullName = x.FullName,
@@ -33,14 +33,14 @@ namespace Receiver.Functions
             });
         }
 
-        public static async Task<DataContactLocalAccount> GetLocalGroups()
+        public static async Task<LocalAccountDataContact> GetLocalGroups()
         {
             return await Task.Run(() =>
             {
-                return new DataContactLocalAccount()
+                return new LocalAccountDataContact()
                 {
                     LocalGroups = LocalGroup.Load().
-                        Select(x => new DataContactLocalAccount.LocalGroup()
+                        Select(x => new LocalAccountDataContact.LocalGroup()
                         {
                             Name = x.Name,
                             Description = x.Description,

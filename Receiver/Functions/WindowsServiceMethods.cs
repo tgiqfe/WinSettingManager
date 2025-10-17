@@ -48,14 +48,14 @@ namespace Receiver.Functions
         }
         */
 
-        public static async Task<DataContactWindowsService> GetServiceSummaries(string name = null)
+        public static async Task<WindowsServiceDataContact> GetServiceSummaries(string name = null)
         {
             return await Task.Run(() =>
             {
-                return new DataContactWindowsService()
+                return new WindowsServiceDataContact()
                 {
                     ServiceSummaries = ServiceSummary.Load(name).
-                        Select(x => new DataContactWindowsService.ServiceSummary()
+                        Select(x => new WindowsServiceDataContact.ServiceSummary()
                         {
                             Name = x.Name,
                             DisplayName = x.DisplayName,
@@ -72,14 +72,14 @@ namespace Receiver.Functions
             });
         }
 
-        public static async Task<DataContactWindowsService> GetServiceSimpleSummaries(string name = null)
+        public static async Task<WindowsServiceDataContact> GetServiceSimpleSummaries(string name = null)
         {
-            return new DataContactWindowsService()
+            return new WindowsServiceDataContact()
             {
                 ServiceSimpleSummaries = await Task.Run(() =>
                 {
                     return ServiceSimpleSummary.Load(name).
-                        Select(x => new DataContactWindowsService.ServiceSimpleSummary()
+                        Select(x => new WindowsServiceDataContact.ServiceSimpleSummary()
                         {
                             Name = x.Name,
                             DisplayName = x.DisplayName,

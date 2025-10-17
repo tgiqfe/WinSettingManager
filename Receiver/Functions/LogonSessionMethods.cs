@@ -1,19 +1,19 @@
 ﻿using Receiver.DataContact;
 using WinSettingManager.Lib.LogonSession;
-using static Receiver.DataContact.DataContactLogonSession;
+using static Receiver.DataContact.LogonSessionDataContact;
 
 namespace Receiver.Functions
 {
     public class LogonSessionMethods
     {
-        public static async Task<DataContactLogonSession> GetLogonSessions()
+        public static async Task<LogonSessionDataContact> GetLogonSessions()
         {
             return await Task.Run(() =>
             {
-                return new DataContactLogonSession()
+                return new LogonSessionDataContact()
                 {
                     LoggedOnSessions = WinSettingManager.Lib.LogonSession.UserLogonSession.GetLoggedOnSession().
-                        Select(s => new DataContactLogonSession.UserLogonSession()
+                        Select(s => new LogonSessionDataContact.UserLogonSession()
                         {
                             UserName = s.UserName,
                             UserDomain = s.UserDomain,
@@ -27,7 +27,7 @@ namespace Receiver.Functions
             });
         }
 
-        public static async Task<DataContactLogonSession> SetLogonSessions(DataContactLogonSession contact)
+        public static async Task<LogonSessionDataContact> SetLogonSessions(LogonSessionDataContact contact)
         {
             switch(contact.Action)
             {

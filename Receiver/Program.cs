@@ -81,13 +81,13 @@ app.MapGet($"{api_v1}/localaccount/group/list", () =>
 //  Logon Sessions
 app.MapGet($"{api_v1}/logonsession/list", () =>
     LogonSessionMethods.GetLogonSessions());
-app.MapPost($"{api_v1}/logonsession/user", (DataContactLogonSession contact) =>
+app.MapPost($"{api_v1}/logonsession/user", (LogonSessionDataContact contact) =>
     LogonSessionMethods.SetLogonSessions(contact));
 
 //  Sound Volume
 app.MapGet($"{api_v1}/sound/volume", async () =>
     await SoundMethods.GetSoundVolume());
-app.MapPost($"{api_v1}/sound/volume", async (DataContactSoundVolume contact) =>
+app.MapPost($"{api_v1}/sound/volume", async (SoundVolumeDataContact contact) =>
     await SoundMethods.SetSoundVolume(contact));
 
 //  Windows Service

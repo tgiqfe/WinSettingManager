@@ -1,6 +1,6 @@
 ﻿namespace Receiver.DataContact
 {
-    public class DataContactLocalAccount
+    public class LocalAccountDataContact
     {
         public class LocalUser
         {

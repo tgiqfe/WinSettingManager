@@ -1,6 +1,6 @@
 ﻿namespace Receiver.DataContact
 {
-    public class DataContactWindowsService
+    public class WindowsServiceDataContact
     {
         public class ServiceSummary
         {

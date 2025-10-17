@@ -13,12 +13,12 @@ namespace Receiver.Functions
         /// Get System Information
         /// </summary>
         /// <returns></returns>
-        public static async Task<DataContactSystemInfo> GetSystemInfo()
+        public static async Task<SystemInfoDataContact> GetSystemInfo()
         {
             return await Task.Run(() =>
             {
                 var sessions = UserLogonSession.GetLoggedOnSession();
-                return new DataContactSystemInfo()
+                return new SystemInfoDataContact()
                 {
                     OSVersion = GetOSVersion(),
                     MachineName = Environment.MachineName,
