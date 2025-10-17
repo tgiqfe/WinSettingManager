@@ -3,6 +3,7 @@ using System.Management;
 
 namespace WinSettingManager.Lib.LocalAccount
 {
+    /*
     public class LocalUserFunctions
     {
         /// <summary>
@@ -65,4 +66,5 @@ namespace WinSettingManager.Lib.LocalAccount
             }
         }
     }
+    */
 }

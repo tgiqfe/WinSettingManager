@@ -8,6 +8,7 @@ using System.DirectoryServices;
 
 namespace WinSettingManager.Lib.LocalAccount
 {
+    /*
     public class LocalGroupFunctions
     {
         /// <summary>
@@ -58,4 +59,5 @@ namespace WinSettingManager.Lib.LocalAccount
             }
         }
     }
+    */
 }

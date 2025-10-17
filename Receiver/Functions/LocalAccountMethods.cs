@@ -11,7 +11,7 @@ namespace Receiver.Functions
             {
                 return new DataContactLocalAccount()
                 {
-                    LocalUsers = LocalUserFunctions.GetLocalUsers().
+                    LocalUsers = LocalUser.Load().
                         Select(x => new DataContactLocalAccount.LocalUser()
                         {
                             Name = x.Name,
@@ -39,7 +39,7 @@ namespace Receiver.Functions
             {
                 return new DataContactLocalAccount()
                 {
-                    LocalGroups = LocalGroupFunctions.GetLocalGroups().
+                    LocalGroups = LocalGroup.Load().
                         Select(x => new DataContactLocalAccount.LocalGroup()
                         {
                             Name = x.Name,
