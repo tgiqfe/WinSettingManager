@@ -4,7 +4,6 @@ using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WinSettingManager.Lib.SystemProperties.OSVersion;
 
 namespace WinSettingManager.Lib.SystemProperties.OSVersion.Builder
 {

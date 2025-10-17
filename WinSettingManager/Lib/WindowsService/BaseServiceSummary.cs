@@ -11,23 +11,26 @@ namespace WinSettingManager.Lib.WindowsService
 {
     public class BaseServiceSummary
     {
+        protected ServiceController _sc { get; set; }
+        protected ManagementObject _mo { get; set; }
+
         /// <summary>
         /// Is the service a delayed auto start service?
         /// </summary>
         /// <param name="sc"></param>
         /// <param name="mo"></param>
         /// <returns></returns>
-        public bool IsDelayedAutoStart(ServiceController sc, ManagementObject mo = null)
+        public bool IsDelayedAutoStart()
         {
-            if (sc == null) return false;
-            if (mo == null)
+            if (_sc == null) return false;
+            if (_mo == null)
             {
                 var keyPath = @"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services";
                 using (var regKey = RegistryFunctions.GetRegistryKey(keyPath, false))
                 {
                     if (regKey != null)
                     {
-                        using (var subKey = regKey.OpenSubKey(sc.ServiceName))
+                        using (var subKey = regKey.OpenSubKey(_sc.ServiceName))
                         {
                             if (subKey != null)
                             {
@@ -44,7 +47,7 @@ namespace WinSettingManager.Lib.WindowsService
             }
             else
             {
-                return sc.StartType == ServiceStartMode.Automatic && mo["DelayedAutoStart"] as bool? == true;
+                return _sc.StartType == ServiceStartMode.Automatic && _mo["DelayedAutoStart"] as bool? == true;
             }
             return false;
         }
@@ -54,15 +57,15 @@ namespace WinSettingManager.Lib.WindowsService
         /// </summary>
         /// <param name="sc"></param>
         /// <returns></returns>
-        public bool IsTriggeredStart(ServiceController sc)
+        public bool IsTriggeredStart()
         {
-            if (sc == null) return false;
+            if (_sc == null) return false;
             var keyPath = @"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services";
             using (var regKey = RegistryFunctions.GetRegistryKey(keyPath, false))
             {
                 if (regKey != null)
                 {
-                    using (var subKey = regKey.OpenSubKey(sc.ServiceName))
+                    using (var subKey = regKey.OpenSubKey(_sc.ServiceName))
                     {
                         if (subKey != null)
                         {

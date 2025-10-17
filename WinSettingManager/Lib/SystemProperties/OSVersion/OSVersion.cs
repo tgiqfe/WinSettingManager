@@ -62,7 +62,7 @@
         /// <returns></returns>
         public static bool operator <(OSVersion x, OSVersion y)
         {
-            return x is not null && y is not null ? (x.Name == y.Name || x.OSFamily == OSFamily.Any || y.OSFamily == OSFamily.Any) && x.Serial < y.Serial : false;
+            return x is not null && y is not null ? ((x.Name == y.Name || x.OSFamily == OSFamily.Any || y.OSFamily == OSFamily.Any) && x.Serial < y.Serial) : false;
         }
 
         /// <summary>
@@ -92,7 +92,7 @@
         /// <returns></returns>
         public static bool operator >(OSVersion x, OSVersion y)
         {
-            return x is not null && y is not null ? (x.Name == y.Name || x.OSFamily == OSFamily.Any || y.OSFamily == OSFamily.Any) && x.Serial > y.Serial : false;
+            return x is not null && y is not null ? ((x.Name == y.Name || x.OSFamily == OSFamily.Any || y.OSFamily == OSFamily.Any) && x.Serial > y.Serial) : false;
         }
 
         /// <summary>
@@ -123,7 +123,7 @@
         /// <returns></returns>
         public static bool operator <=(OSVersion x, OSVersion y)
         {
-            return x is not null && y is not null ? (x.Name == y.Name || x.OSFamily == OSFamily.Any || y.OSFamily == OSFamily.Any) && x.Serial <= y.Serial : false;
+            return x is not null && y is not null ? ((x.Name == y.Name || x.OSFamily == OSFamily.Any || y.OSFamily == OSFamily.Any) && x.Serial <= y.Serial) : false;
         }
 
         /// <summary>
@@ -153,7 +153,7 @@
         /// <returns></returns>
         public static bool operator >=(OSVersion x, OSVersion y)
         {
-            return x is not null && y is not null ? (x.Name == y.Name || x.OSFamily == OSFamily.Any || y.OSFamily == OSFamily.Any) && x.Serial >= y.Serial : false;
+            return x is not null && y is not null ? ((x.Name == y.Name || x.OSFamily == OSFamily.Any || y.OSFamily == OSFamily.Any) && x.Serial >= y.Serial) : false;
         }
 
         /// <summary>
@@ -215,7 +215,7 @@
         /// <returns></returns>
         public static bool operator !=(OSVersion x, OSVersion y)
         {
-            if (x is not null && y is not null) { return x.Name == y.Name || x.OSFamily == OSFamily.Any || y.OSFamily == OSFamily.Any || x.Serial != y.Serial; }
+            if (x is not null && y is not null) { return (x.Name == y.Name || x.OSFamily == OSFamily.Any || y.OSFamily == OSFamily.Any) || x.Serial != y.Serial; }
             if (x is null && y is null) { return false; }
             return true;
         }
@@ -246,9 +246,9 @@
         {
             return obj switch
             {
-                OSVersion o => Serial == o.Serial,
-                int i => Serial == i,
-                long l => Serial == l,
+                OSVersion o => this.Serial == o.Serial,
+                int i => this.Serial == i,
+                long l => this.Serial == l,
                 _ => false,
             };
         }
@@ -260,21 +260,21 @@
 
         public bool IsMatch(string keyword)
         {
-            if (Name.Equals(keyword, StringComparison.OrdinalIgnoreCase) ||
-                (Alias?.Any(x => keyword.Equals(x, StringComparison.OrdinalIgnoreCase)) ?? false))
+            if (this.Name.Equals(keyword, StringComparison.OrdinalIgnoreCase) ||
+                (this.Alias?.Any(x => keyword.Equals(x, StringComparison.OrdinalIgnoreCase)) ?? false))
             {
                 return true;
             }
-            if (VersionName == keyword) return true;
-            if (VersionAlias?.Any(x => x.Equals(keyword, StringComparison.OrdinalIgnoreCase)) ?? false) return true;
-            if ((keyword.StartsWith(Name) || (Alias?.Any(x => keyword.StartsWith(x)) ?? false)) &&
-                (keyword.EndsWith(VersionName) || (VersionAlias?.Any(x => keyword.EndsWith(x)) ?? false))) return true;
+            if (this.VersionName == keyword) return true;
+            if (this.VersionAlias?.Any(x => x.Equals(keyword, StringComparison.OrdinalIgnoreCase)) ?? false) return true;
+            if ((keyword.StartsWith(this.Name) || (this.Alias?.Any(x => keyword.StartsWith(x)) ?? false)) &&
+                (keyword.EndsWith(this.VersionName) || (this.VersionAlias?.Any(x => keyword.EndsWith(x)) ?? false))) return true;
             return false;
         }
 
         public override string ToString()
         {
-            return $"{Name} [ver {VersionName}]";
+            return $"{Name} {Edition} [ver {VersionName}]";
         }
 
         #endregion

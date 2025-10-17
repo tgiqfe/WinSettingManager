@@ -1,4 +1,4 @@
-﻿namespace WinSettingManager.Lib.TuneVolume
+﻿namespace WinSettingManager.Lib.SoundVolume
 {
     public class VolumeSummary
     {

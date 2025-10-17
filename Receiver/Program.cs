@@ -1,12 +1,7 @@
+using Microsoft.Extensions.Hosting.WindowsServices;
 using Receiver.DataContact;
 using Receiver.Functions;
-using Receiver.Lib;
 using System.Diagnostics;
-using System.Reflection.Metadata.Ecma335;
-using System.Text.Json.Nodes;
-using WinSettingManager.Lib.NetworkInfo;
-using WinSettingManager.Lib.SystemProperties;
-using WinSettingManager.Lib.TuneVolume;
 
 
 //  Prepare Web Application.
@@ -26,6 +21,15 @@ builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options =>
     options.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
     options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
 });
+builder.Services.AddWindowsService(options =>
+{
+    options.ServiceName = "WinSetMng";
+});
+if (WindowsServiceHelpers.IsWindowsService())
+{
+    builder.Services.AddSingleton<IHostLifetime, Receiver.ServiceLifeTime>();
+}
+
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
@@ -88,13 +92,13 @@ app.MapPost($"{api_v1}/sound/volume", async (DataContactSoundVolume contact) =>
 
 //  Windows Service
 app.MapGet($"{api_v1}/service/list", async () =>
-    await ServiceMethods.GetServiceSummaries());
+    await WindowsServiceMethods.GetServiceSummaries());
 app.MapGet($"{api_v1}/service/list/{{name}}", async (string name) =>
-    await ServiceMethods.GetServiceSummary(name));
+    await WindowsServiceMethods.GetServiceSummaries(name));
 app.MapGet($"{api_v1}/service/simple/list", async () =>
-    await ServiceMethods.GetServiceSimpleSummaries());
+    await WindowsServiceMethods.GetServiceSimpleSummaries());
 app.MapGet($"{api_v1}/service/simple/list/{{name}}", async (string name) =>
-    await ServiceMethods.GetServiceSimpleSummary(name));
+    await WindowsServiceMethods.GetServiceSimpleSummaries(name));
 
 
 app.MapPost($"{api_v1}/registry/key", (HttpRequest req) => "");

@@ -1,11 +1,11 @@
 ﻿using Receiver.DataContact;
 using WinSettingManager.Lib.SystemProperties;
 using WinSettingManager.Lib.LogonSession;
-using WinSettingManager.Lib.TuneVolume;
+using WinSettingManager.Lib.SoundVolume;
 using WinSettingManager.Lib.WindowsService;
 using WinSettingManager.Lib.SystemProperties.OSVersion;
 
-namespace Receiver.Lib
+namespace Receiver.Functions
 {
     public class SystemMethods
     {
