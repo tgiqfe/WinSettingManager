@@ -128,7 +128,8 @@ namespace WinSettingManager.Lib.SystemProperties.OSVersion
                 osver = this.
                     Where(x => x.OSFamily == OSFamily.Windows && (x.ServerOS ?? false) == isServer && x.Name == osName).
                     FirstOrDefault(x => x.VersionName == version);
-                osver.Edition = Enum.TryParse(edition, out Edition tempEdition) ? tempEdition : Edition.None;
+                //osver.Edition = Enum.TryParse(edition, out Edition tempEdition) ? tempEdition : Edition.None;
+                osver.Edition = EditionHelper.Parse(edition);
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
@@ -143,7 +144,7 @@ namespace WinSettingManager.Lib.SystemProperties.OSVersion
 
         public static OSVersion GetCurrent(OSVersions osVersions = null)
         {
-            osVersions ??= Load();
+            osVersions ??= OSVersions.Load();
             return osVersions.GetCurrent();
         }
 
@@ -154,7 +155,7 @@ namespace WinSettingManager.Lib.SystemProperties.OSVersion
 
         public static OSVersion FromKeyword(string keyword, OSVersions osVersions = null)
         {
-            osVersions ??= Load();
+            osVersions ??= OSVersions.Load();
             return osVersions.FromKeyword(keyword);
         }
 
@@ -190,7 +191,7 @@ namespace WinSettingManager.Lib.SystemProperties.OSVersion
 
         public static bool Within(string text, OSVersion current = null, OSVersions osVersions = null)
         {
-            osVersions ??= Load();
+            osVersions ??= OSVersions.Load();
             return osVersions.Within(text, current);
         }
 

@@ -70,7 +70,6 @@ namespace WinSettingManager.Lib.SystemProperties.OSVersion.Functions
         public static (string, string, string, string, bool) GetCurrent()
         {
             string caption = "";
-            string edition = "";
             string version = "";
 
             try
@@ -81,7 +80,7 @@ namespace WinSettingManager.Lib.SystemProperties.OSVersion.Functions
                     OfType<ManagementObject>().
                     First();
                 caption = mo["Caption"]?.ToString();
-                edition = caption.Split(" ").Last();
+                //edition = caption.Split(" ").Last();
                 version = mo["Version"]?.ToString() ?? "";
             }
             catch
@@ -90,16 +89,16 @@ namespace WinSettingManager.Lib.SystemProperties.OSVersion.Functions
                 var outTexts = CommandOutput(
                     "powershell", "-Command \"$os = @(Get-CimInstance Win32_OperatingSystem); $os.Caption; $os.Version\"").ToArray();
                 caption = outTexts[0];
-                edition = caption.Split(" ").Last();
+                //edition = caption.Split(" ").Last();
                 version = outTexts[1];
             }
 
-            string osName = caption switch
+            (string osName, string edition) = caption switch
             {
-                string s when s.StartsWith("Microsoft Windows 10") => "Windows 10",
-                string s when s.StartsWith("Microsoft Windows 11") => "Windows 11",
-                string s when s.StartsWith("Microsoft Windows Server") => "Windows Server",
-                _ => null,
+                string s when s.StartsWith("Microsoft Windows 10") => ("Windows 10", s.Substring(20).Trim()),
+                string s when s.StartsWith("Microsoft Windows 11") => ("Windows 11", s.Substring(20).Trim()),
+                string s when s.StartsWith("Microsoft Windows Server") => ("Windows Server", s.Substring(24).Trim()),
+                _ => (null, null)
             };
             bool isServer = IsServer();
 
